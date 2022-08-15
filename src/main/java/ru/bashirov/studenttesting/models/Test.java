@@ -3,6 +3,7 @@ package ru.bashirov.studenttesting.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
@@ -16,12 +17,18 @@ public final class Test {
     private int id;
 
     @Column(name = "title")
+    @NotBlank(message = "Название теста не может быть пустым")
+    @Size(min = 4, max = 100, message = "Название может содержать от 4 до 100 символов")
     private String title;
 
     @Column(name = "category")
+    @NotBlank(message = "Название категории не должно быть пустым")
+    @Size(min = 4, max = 100, message = "Название категории должно содержать от 4 до 100 символов")
     private String category;
 
     @Column(name = "count_of_questions")
+    @Min(value = 2, message = "Количество вопросов должно быть не меньше 2")
+    @Max(value = 100, message = "Количество вопросов должно быть не больше 100")
     private int countOfQuestions;
 
     @Column(name = "count_of_decisions")

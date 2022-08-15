@@ -3,6 +3,7 @@ package ru.bashirov.studenttesting.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
@@ -16,18 +17,32 @@ public class User {
     private int id;
 
     @Column(name = "first_name")
+    @NotBlank(message = "Имя не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Имя должно содержать от 2 до 30 символов")
+    @Pattern(regexp = "^[А-Яа-я]+$", message = "Имя должно быть на русском языке")
     private String first_name;
 
     @Column(name = "last_name")
+    @NotBlank(message = "Фамилия не должна быть пустой")
+    @Size(min = 2, max = 30, message = "Фамилия должна содержать от 2 до 30 символов")
+    @Pattern(regexp = "^[А-Яа-я]+$", message = "Фамилия должна быть на русском языке")
     private String last_name;
 
     @Column(name = "login")
+    @NotBlank(message = "Логин не должен быть пустым")
+    @Size(min = 5, max = 30, message = "Логин должен содержать от 5 до 30 символов")
+    @Pattern(regexp = "^\\w+$", message = "Логин должен содержать только цифры и буквы латинского алфавита")
     private String login;
 
     @Column(name = "email")
+    @NotBlank(message = "Email не должен быть пустым")
+    @Email(message = "Email должен быть корректным")
     private String email;
 
     @Column(name = "password")
+    @NotBlank(message = "Пароль не должен быть пустым")
+    @Size(min = 5, max = 30, message = "Пароль должен содержать от 5 до 30 символов")
+    @Pattern(regexp = "^\\w+$", message = "Пароль может содержать только цифры и буквы латинского алфавита")
     private String password;
 
     @Column(name = "year_of_birth")
@@ -126,5 +141,13 @@ public class User {
 
     public void setTests(List<Test> tests) {
         this.tests = tests;
+    }
+
+    public Date getTimeOfRegistration() {
+        return timeOfRegistration;
+    }
+
+    public void setTimeOfRegistration(Date timeOfRegistration) {
+        this.timeOfRegistration = timeOfRegistration;
     }
 }

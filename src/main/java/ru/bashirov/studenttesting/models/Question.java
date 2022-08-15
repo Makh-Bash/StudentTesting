@@ -1,6 +1,10 @@
 package ru.bashirov.studenttesting.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "questions")
@@ -12,24 +16,40 @@ public final class Question {
     private int id;
 
     @Column(name = "title")
+    @Size(min = 5, max = 1000, message = "Вопрос должен содержать от 5 до 1000 символов")
+    @NotBlank(message = "Поле с вопросом не должно быть пустым")
     private String title;
 
     @Column(name = "number_of_question")
     private int number_of_question;
 
     @Column(name = "correct_answer_id")
+    @Min(value = 1, message = "Минимальный номер ответа должен быть не меньше 1")
+    @Max(value = 4, message = "Максимальный номер ответа должен быть не больше 4")
     private int correctAnswerId;
 
+
+    /**
+     * TODO Попробовать поменять на список из вопросов
+     */
     @Column(name = "first_answer")
+    @NotBlank(message = "Поле с вопросом не должно быть пустым")
+    @Size(min = 1, max = 100, message = "Поле с ответом должно содержать от 1 до 100 символов")
     private String firstAnswer;
 
     @Column(name = "second_answer")
+    @NotBlank(message = "Поле с вопросом не должно быть пустым")
+    @Size(min = 1, max = 100, message = "Поле с ответом должно содержать от 1 до 100 символов")
     private String secondAnswer;
 
     @Column(name = "third_answer")
+    @NotBlank(message = "Поле с вопросом не должно быть пустым")
+    @Size(min = 1, max = 100, message = "Поле с ответом должно содержать от 1 до 100 символов")
     private String thirdAnswer;
 
     @Column(name = "fourth_answer")
+    @NotBlank(message = "Поле с вопросом не должно быть пустым")
+    @Size(min = 1, max = 100, message = "Поле с ответом должно содержать от 1 до 100 символов")
     private String fourthAnswer;
 
     @ManyToOne
