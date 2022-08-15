@@ -20,13 +20,13 @@ public class User {
     @NotBlank(message = "Имя не должно быть пустым")
     @Size(min = 2, max = 30, message = "Имя должно содержать от 2 до 30 символов")
     @Pattern(regexp = "^[А-Яа-я]+$", message = "Имя должно быть на русском языке")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "last_name")
     @NotBlank(message = "Фамилия не должна быть пустой")
     @Size(min = 2, max = 30, message = "Фамилия должна содержать от 2 до 30 символов")
     @Pattern(regexp = "^[А-Яа-я]+$", message = "Фамилия должна быть на русском языке")
-    private String last_name;
+    private String lastName;
 
     @Column(name = "login")
     @NotBlank(message = "Логин не должен быть пустым")
@@ -61,8 +61,8 @@ public class User {
     private List<Test> tests;
 
     public User(String first_name, String last_name, String login, String email, String password, Date yearOfBirth) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = first_name;
+        this.lastName = last_name;
         this.login = login;
         this.email = email;
         this.password = password;
@@ -79,20 +79,20 @@ public class User {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getLogin() {
