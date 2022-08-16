@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.bashirov.studenttesting.models.User;
 import ru.bashirov.studenttesting.repositories.UsersRepository;
 
+import java.util.Date;
+
 @Service
 public class RegistrationService {
 
@@ -22,9 +24,12 @@ public class RegistrationService {
 
     @Transactional
     public void register(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        TODO Найти решение
-        user.setRole("ROLE_USER");
+        enrichUser(user);
         usersRepository.save(user);
+    }
+
+    private void enrichUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setTimeOfRegistration(new Date());
     }
 }

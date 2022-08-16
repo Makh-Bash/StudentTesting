@@ -41,8 +41,8 @@ public class User {
 
     @Column(name = "password")
     @NotBlank(message = "Пароль не должен быть пустым")
-    @Size(min = 5, max = 30, message = "Пароль должен содержать от 5 до 30 символов")
-    @Pattern(regexp = "^\\w+$", message = "Пароль может содержать только цифры и буквы латинского алфавита")
+    @Size(min = 5, max = 100, message = "Пароль должен содержать от 5 до 30 символов")
+//    @Pattern(regexp = "^\\w+$", message = "Пароль может содержать только цифры и буквы латинского алфавита")
     private String password;
 
     @Column(name = "year_of_birth")

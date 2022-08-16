@@ -14,6 +14,32 @@
     <input type="text" th:field="*{lastName}" id="lastName">
     <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LASTNAME ERROR</div>
     <br>
+    <label for="login">Введите логин (Изменить нельзя):</label>
+    <input type="text" th:field="*{login}" id="login">
+    <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">LOGIN ERROR</div>
+    <br>
+    <label for="email">Введите email (Изменить нельзя):</label>
+    <input type="email" th:field="*{email}" id="email">
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">EMAIL ERROR</div>
+    <br>
+    <!--    TODO поменять на date-->
+    <label for="date">Введите дату рождения (01/01/2000):</label>
+    <input type="text" th:field="*{yearOfBirth}" id="date">
+    <div style="color: red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">DATE ERROR</div>
+    <br>
+    <p>Вы :</p>
+    <br>
+    <label for="student">Студент</label>
+    <input type="checkbox" checked="checked" th:name="role" id="student" value="student">
+    <br>
+    <label for="teacher">Учитель</label>
+    <input type="checkbox" th:name="role" id="teacher" value="teacher">
+    <br>
+    <label for="password">Придумайте пароль (от 5 до 30 символов) :</label>
+    <input type="password" th:field="*{password}" id="password">
+    <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">PASSWORD ERROR</div>
+    <br>
+    <input type="submit" value="Зарегистрироваться">
 
 </form>
 </body>

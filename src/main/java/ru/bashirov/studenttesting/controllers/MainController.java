@@ -8,7 +8,12 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "main/index";
     }
+
+//    @GetMapping("/error")
+//    public String errorPage() {
+//        return "main/error";
+//    }
 
 }

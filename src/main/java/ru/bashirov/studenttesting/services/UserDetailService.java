@@ -23,9 +23,11 @@ public class UserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         Optional<User> user = usersRepository.findByLogin(login);
+        System.out.println(user.get().getPassword());
 
-        if (user.isEmpty())
+        if (user.isEmpty()) {
             throw new UsernameNotFoundException("Неверный пароль или логин");
+        }
 
         return new ru.bashirov.studenttesting.sequrity.UserDetails(user.get());
     }
