@@ -5,7 +5,21 @@
     <title>Тесты</title>
 </head>
 <body>
-Тесты
+<p>Тесты</p>
 <a th:href="@{/}">Главная</a>
+
+<div th:if="${tests.isEmpty()}">
+    <p>Извините, тестирование на данный момент недоступно</p>
+</div>
+
+<div th:if="${!tests.isEmpty()}">
+    <div th:each="test : ${tests}">
+        <p th:text="${test.getTitle()}"></p>
+        <p th:text="${test.getCategory()}"></p>
+        <p th:text="${test.getCountOfQuestions()}"></p>
+        <a th:href="@{test/{id}(id=${test.getId()})}">Решить</a>
+        <hr>
+    </div>
+</div>
 </body>
 </html>

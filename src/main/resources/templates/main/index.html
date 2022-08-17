@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>StudTesting</title>
 </head>
 <body>
     <p>Hello!</p>
-    <a th:href="@{/test}">Тесты</a>
+    <a th:href="@{/test}">Тесты</a><br>
+
+    <a th:href="@{/teacher}" sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">Мои тесты<br></a>
+    <a th:href="@{/}" sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">Создать новый тест<br></a>
+    <a th:href="@{/}" sec:authorize="hasRole('ROLE_ADMIN')">Кабинет администратора <br></a>
+
 
 </body>
 </html>

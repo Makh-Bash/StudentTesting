@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Тестирование</title>
+</head>
+<body>
+
+<div th:if="${test.isEmpty()}">
+    <p>Извините, данный тест не существует или был удален</p>
+</div>
+
+<div th:if="${!test.isEmpty()}">
+    <h3 th:text="${test.get().getTitle()}"></h3>
+    <p th:text="${test.get().getCategory()}"></p>
+    <p>
+        Количество вопросов:
+        <span th:text="${test.get().getCountOfQuestions()}"></span>
+    </p>
+    <p>
+        Количество решений:
+        <span th:text="${test.get().getCountOfDecisions()}"></span>
+    </p>
+    <p>
+        Дата создания:
+        <span th:text="${test.get().getDateOfCreation()}"></span>
+    </p>
+    <p>
+        Автор:
+        <span th:text="${test.get().getOwner().getFirstName()
+        + ' ' + test.get().getOwner().getLastName()}"></span>
+    </p>
+
+    <a th:href="@{/test/{id}/show(id=${test.get().getId()})}">Начать решение</a>
+
+
+</div>
+
+
+</body>
+</html>

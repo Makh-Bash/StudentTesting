@@ -30,17 +30,19 @@
     <p>Вы :</p>
     <br>
     <label for="student">Студент</label>
-    <input type="checkbox" checked="checked" th:name="role" id="student" value="student">
+    <input type="radio" checked th:name="role" id="student" value="student">
     <br>
     <label for="teacher">Учитель</label>
-    <input type="checkbox" th:name="role" id="teacher" value="teacher">
+    <input type="radio" th:name="role" id="teacher" value="teacher">
     <br>
     <label for="password">Придумайте пароль (от 5 до 30 символов) :</label>
     <input type="password" th:field="*{password}" id="password">
     <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">PASSWORD ERROR</div>
     <br>
     <input type="submit" value="Зарегистрироваться">
+    <br>
 
+    <a th:href="@{/auth/login}">Уже есть аккаунт?</a>
 </form>
 </body>
 </html>

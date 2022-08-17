@@ -52,6 +52,9 @@ public final class Question {
     @Size(min = 1, max = 100, message = "Поле с ответом должно содержать от 1 до 100 символов")
     private String fourthAnswer;
 
+    @Transient
+    private Integer chooseAnswer;
+
     @ManyToOne
     @JoinColumn(name = "tests_id", referencedColumnName = "id")
     private Test test;
@@ -142,4 +145,16 @@ public final class Question {
     }
 
 
+    public boolean isRight() {
+        if (chooseAnswer == null) return false;
+        return chooseAnswer == correctAnswerId;
+    }
+
+    public Integer getChooseAnswer() {
+        return chooseAnswer;
+    }
+
+    public void setChooseAnswer(Integer chooseAnswer) {
+        this.chooseAnswer = chooseAnswer;
+    }
 }

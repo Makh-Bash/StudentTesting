@@ -20,6 +20,10 @@
     <div th:if="${param.error}" style="color: red">
         Неправильные имя или пароль
     </div>
+
+    <br>
+    <a th:href="@{/auth/registration}">Уже есть в системе?</a>
+
 </form>
 
 </body>
