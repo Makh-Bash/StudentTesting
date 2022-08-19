@@ -16,8 +16,8 @@ public final class Question {
     private int id;
 
     @Column(name = "title")
-    @Size(min = 5, max = 1000, message = "Вопрос должен содержать от 5 до 1000 символов")
     @NotBlank(message = "Поле с вопросом не должно быть пустым")
+    @Size(min = 3, max = 1000, message = "Вопрос должен содержать от 3 до 1000 символов")
     private String title;
 
     @Column(name = "number_of_question")

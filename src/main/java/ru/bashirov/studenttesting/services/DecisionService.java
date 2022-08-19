@@ -2,6 +2,7 @@ package ru.bashirov.studenttesting.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.bashirov.studenttesting.models.AnswersList;
 import ru.bashirov.studenttesting.repositories.DecisionsRepository;
 
 @Service
@@ -12,5 +13,9 @@ public class DecisionService {
     @Autowired
     public DecisionService(DecisionsRepository decisionsRepository) {
         this.decisionsRepository = decisionsRepository;
+    }
+
+    public void save(AnswersList answersList) {
+
     }
 }

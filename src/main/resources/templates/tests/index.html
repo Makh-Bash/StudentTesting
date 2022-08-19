@@ -14,9 +14,9 @@
 
 <div th:if="${!tests.isEmpty()}">
     <div th:each="test : ${tests}">
-        <p th:text="${test.getTitle()}"></p>
-        <p th:text="${test.getCategory()}"></p>
-        <p th:text="${test.getCountOfQuestions()}"></p>
+        <p th:text="${'Название: ' + test.getTitle()}"></p>
+        <p th:text="${'Категория: ' + test.getCategory().title}"></p>
+        <p th:text="${'Количество вопросов' + test.getCountOfQuestions()}"></p>
         <a th:href="@{test/{id}(id=${test.getId()})}">Решить</a>
         <hr>
     </div>

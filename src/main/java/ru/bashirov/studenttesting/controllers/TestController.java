@@ -6,11 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.bashirov.studenttesting.models.AnswersList;
 import ru.bashirov.studenttesting.models.Question;
+import ru.bashirov.studenttesting.services.DecisionService;
 import ru.bashirov.studenttesting.services.QuestionService;
 import ru.bashirov.studenttesting.services.TestService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/test")
@@ -20,10 +20,13 @@ public class TestController {
 
     private final QuestionService questionService;
 
+    private final DecisionService decisionService;
+
     @Autowired
-    public TestController(TestService testService, QuestionService questionService) {
+    public TestController(TestService testService, QuestionService questionService, DecisionService decisionService) {
         this.testService = testService;
         this.questionService = questionService;
+        this.decisionService = decisionService;
     }
 
     @GetMapping()
@@ -57,6 +60,8 @@ public class TestController {
         int rightAnswersCount = (int) answersList.getAnswers().stream().filter(Question::isRight).count();
         String resultInfo = rightAnswersCount + "/" + answersList.getAllQuestionsCount();
 
+
+        decisionService.save(answersList);
         testService.countUp(id);
         model.addAttribute("resultInfo", resultInfo);
         return "/tests/result";

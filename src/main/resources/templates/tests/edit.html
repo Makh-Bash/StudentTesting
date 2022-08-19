@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+<div>
+  <form th:method="PATCH" th:action="@{/teacher/{id}(id=${test.id})}" th:object="${test}">
+    <input type="hidden" th:field="*{owner}">
+    <input type="hidden" th:field="*{countOfQuestions}">
+    <input type="hidden" th:field="*{category}">
+    <input type="hidden" th:field="*{title}">
+    <input type="hidden" th:field="*{dateOfCreation}">
+    <input type="hidden" th:field="*{countOfDecisions}">
+
+    <div th:each="question, iterstat : *{questions}">
+      <input type="hidden" th:field="*{questions[__${iterstat.index}__].id}">
+      <input type="hidden" th:field="*{questions[__${iterstat.index}__].number_of_question}">
+<!--      <input type="hidden" th:field="*{questions[__${iterstat.index}__].}">-->
+
+      <label for="title">Вопрос №</label><span th:text="${iterstat.index+1}"></span>
+      <input type="text" title="Строка не может быть пустой"  required  minlength="4" maxlength="100" th:field="*{questions[__${iterstat.index}__].title}" id="title"><br>
+
+      <label for="firstAnswer">Первый ответ </label>
+      <input type="text" title="Строка не может быть пустой" required  maxlength="100" th:field="*{questions[__${iterstat.index}__].firstAnswer}" id="firstAnswer"><br>
+
+      <label for="secondAnswer">Второй ответ </label>
+      <input type="text" title="Строка не может быть пустой"  required  maxlength="100" th:field="*{questions[__${iterstat.index}__].secondAnswer}" id="secondAnswer"><br>
+
+      <label for="thirdAnswer">Третий ответ </label>
+      <input type="text" title="Строка не может быть пустой" required  maxlength="100" th:field="*{questions[__${iterstat.index}__].thirdAnswer}" id="thirdAnswer"><br>
+
+      <label for="fourthAnswer">Четвертый ответ </label>
+      <input type="text" title="Строка не может быть пустой" required  maxlength="100" th:field="*{questions[__${iterstat.index}__].fourthAnswer}" id="fourthAnswer"><br>
+
+      <!--        TODO Не работает-->
+      <!--        <div style="color: red" th:if="${#fields.hasErrors('questions[__${iterstat.index}__].fourthAnswer')}" th:errors="*{questions[__${iterstat.index}__].fourthAnswer}">ANSWER ERROR</div>-->
+
+      <label for="correctAnswerId">Номер правильного ответа </label>
+      <input required type="number"  min="1" max="4" th:field="*{questions[__${iterstat.index}__].correctAnswerId}" id="correctAnswerId">
+      <hr>
+    </div>
+    <input type="submit" value="Создать">
+  </form>
+</div>
+</body>
+</html>

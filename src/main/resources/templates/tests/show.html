@@ -11,7 +11,7 @@
 
 <div th:if="${!answersList.getAnswers().isEmpty()}">
     <form th:method="POST" th:action="@{/test/{id}/show(id=${answersList.answers.get(0).getTest().getId()})}" th:object="${answersList}">
-
+<!-- TODO поменять расположение-->
         <div th:each="question,iterstat : *{answers}">
             <p th:text="${question.getTitle()}"></p>
             <input type="hidden" th:field="*{answers[__${iterstat.index}__].correctAnswerId}">

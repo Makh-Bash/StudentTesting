@@ -12,13 +12,24 @@
 <div th:if="${!tests.isEmpty()}">
     <div th:each="test : ${tests}">
         <p th:text="'Название: ' + ${test.title}"></p>
-        <p th:text="'Категория: ' + ${test.category}"></p>
+        <p th:text="'Категория: ' + ${test.category.title}"></p>
         <p th:text="'Количество вопросов: ' + ${test.countOfQuestions}"></p>
         <p th:text="'Количество решений: ' + ${test.countOfDecisions}"></p>
-        <p th:text="'Время создания: ' + ${test.dateOfCreation}"></p>
+        <p th:text="'Дата создания: ' + ${test.dateOfCreation}"></p>
+
+        <form th:method="DELETE" th:action="@{/teacher/{id}(id=${test.id})}">
+            <input type="submit" value="Удалить" style="color: red">
+        </form>
+
+        <form th:method="GET" th:action="@{/teacher/{id}/edit(id=${test.id})}">
+            <input type="submit" value="Редактировать" style="color: blue">
+        </form>
+
+
         <hr>
     </div>
+
 </div>
-<a th:href="@{/}"></a>
+<a th:href="@{/}">Главное меню</a>
 </body>
 </html>

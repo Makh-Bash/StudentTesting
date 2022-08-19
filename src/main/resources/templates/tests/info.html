@@ -9,10 +9,10 @@
 <div th:if="${test.isEmpty()}">
     <p>Извините, данный тест не существует или был удален</p>
 </div>
-
+<!-- TODO добавить сортировку-->
 <div th:if="${!test.isEmpty()}">
     <h3 th:text="${test.get().getTitle()}"></h3>
-    <p th:text="${test.get().getCategory()}"></p>
+    <p th:text="${test.get().category.title}"></p>
     <p>
         Количество вопросов:
         <span th:text="${test.get().getCountOfQuestions()}"></span>

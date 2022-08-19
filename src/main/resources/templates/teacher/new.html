@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новый тест</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/teacher/new}" th:object="${test}">
+  <input type="hidden" th:field="*{owner}">
+  <label for="title">Название теста</label>
+  <input type="text" th:field="*{title}" id="title">
+  <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">TITLE ERROR</div>
+  <br>
+  <label for="category">Категория теста</label>
+  <!--    TODO узнать как это работает-->
+  <select id="category" th:field="*{category}">
+    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.title}"></option>
+  </select>
+  <br>
+  <label for="countOfQuestions">Количество вопросов</label>
+  <input type="number" th:field="*{countOfQuestions}" id="countOfQuestions">
+  <div style="color: red" th:if="${#fields.hasErrors('countOfQuestions')}" th:errors="*{countOfQuestions}">COUNT ERROR</div>
+  <br>
+  <input type="submit" value="Продолжить">
+
+</form>
+</body>
+</html>

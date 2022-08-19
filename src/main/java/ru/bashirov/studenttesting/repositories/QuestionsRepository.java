@@ -10,4 +10,6 @@ import java.util.List;
 public interface QuestionsRepository extends JpaRepository<Question, Integer> {
     List<Question> findByTestId(int id);
 
+    void deleteAllByTestId(int id);
+
 }

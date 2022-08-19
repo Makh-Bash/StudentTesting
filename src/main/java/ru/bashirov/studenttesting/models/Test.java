@@ -1,5 +1,6 @@
 package ru.bashirov.studenttesting.models;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -21,10 +22,8 @@ public final class Test {
     @Size(min = 4, max = 100, message = "Название может содержать от 4 до 100 символов")
     private String title;
 
-    @Column(name = "category")
-    @NotBlank(message = "Название категории не должно быть пустым")
-    @Size(min = 4, max = 100, message = "Название категории должно содержать от 4 до 100 символов")
-    private String category;
+//    @NotBlank(message = "Название категории не должно быть пустым")
+//    @Size(min = 4, max = 100, message = "Название категории должно содержать от 4 до 100 символов")
 
     @Column(name = "count_of_questions")
     @Min(value = 2, message = "Количество вопросов должно быть не меньше 2")
@@ -38,16 +37,20 @@ public final class Test {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dateOfCreation;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private TestCategory category;
 
     @ManyToOne
     @JoinColumn(name = "users_id", referencedColumnName = "id")
     private User owner;
 
     @OneToMany(mappedBy = "test")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Question> questions;
 
 
-    public Test(String title, String category, int countOfQuestions, Date dateOfCreation, User owner) {
+    public Test(String title, TestCategory category, int countOfQuestions, Date dateOfCreation, User owner) {
         this.title = title;
         this.category = category;
         this.countOfQuestions = countOfQuestions;
@@ -71,14 +74,6 @@ public final class Test {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public int getCountOfQuestions() {
@@ -119,5 +114,13 @@ public final class Test {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public TestCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(TestCategory testCategory) {
+        this.category = testCategory;
     }
 }

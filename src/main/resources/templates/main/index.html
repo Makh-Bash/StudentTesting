@@ -9,8 +9,8 @@
     <p>Hello!</p>
     <a th:href="@{/test}">Тесты</a><br>
 
-    <a th:href="@{/teacher}" sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">Мои тесты<br></a>
-    <a th:href="@{/}" sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">Создать новый тест<br></a>
+    <a th:href="@{/teacher/}" sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">Мои тесты<br></a>
+    <a th:href="@{/teacher/new}" sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">Создать новый тест<br></a>
     <a th:href="@{/}" sec:authorize="hasRole('ROLE_ADMIN')">Кабинет администратора <br></a>
 
 
