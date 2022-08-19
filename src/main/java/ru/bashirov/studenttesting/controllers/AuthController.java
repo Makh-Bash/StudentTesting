@@ -45,7 +45,6 @@ public class AuthController {
             return "auth/registration";
 
         user.setRole(role.equals("teacher") ? "ROLE_TEACHER" : "ROLE_USER");
-
         registrationService.register(user);
 
         return "redirect:/auth/login";

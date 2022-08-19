@@ -33,7 +33,6 @@ public class TeacherController {
         this.questionService = questionService;
     }
 
-    //    TODO поменять логику
     @GetMapping()
     public String index(Model model) {
         List<Test> tests = testService.findAllByOwnerId(userService.getCurrentUser().getId());
@@ -89,8 +88,8 @@ public class TeacherController {
     public String create(Model model) {
         Test test = new Test();
         test.setOwner(userService.getCurrentUser());
-        model.addAttribute("test", test);
 
+        model.addAttribute("test", test);
         model.addAttribute("categories", testService.getAllCategories());
         return "teacher/new";
     }

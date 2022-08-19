@@ -30,4 +30,14 @@ public class UserDetailService implements UserDetailsService {
 
         return new ru.bashirov.studenttesting.sequrity.UserDetails(user.get());
     }
+
+    public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
+        Optional<User> user = usersRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("Неверный пароль или логин");
+        }
+
+        return new ru.bashirov.studenttesting.sequrity.UserDetails(user.get());
+
+    }
 }

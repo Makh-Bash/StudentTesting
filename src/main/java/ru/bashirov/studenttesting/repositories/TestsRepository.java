@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TestsRepository extends JpaRepository<Test, Integer> {
     List<Test> findAllByOwnerId(int id);
+
+    List<Test> findAllByTitleStartingWith(String startingWith);
 }

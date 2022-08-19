@@ -16,7 +16,19 @@
     <div th:each="test : ${tests}">
         <p th:text="${'Название: ' + test.getTitle()}"></p>
         <p th:text="${'Категория: ' + test.getCategory().title}"></p>
-        <p th:text="${'Количество вопросов' + test.getCountOfQuestions()}"></p>
+        <p th:text="${'Количество вопросов: ' + test.getCountOfQuestions()}"></p>
+
+        <p th:if="${test.countOfCurrentUserDecisions==0}" >Вы пока не решали данный тест</p>
+        <div th:if="${test.countOfCurrentUserDecisions>0}">
+            <span>Вы решали тест </span>
+            <span th:text="${test.countOfCurrentUserDecisions}"></span>
+            <span> раз(а).</span>
+            <p>Лучший результат</p>
+            <span th:text="${test.bestDecisionOfCurrentUser}"></span>
+            <span> из </span>
+            <span th:text="${test.countOfQuestions}"></span>
+        </div>
+
         <a th:href="@{test/{id}(id=${test.getId()})}">Решить</a>
         <hr>
     </div>

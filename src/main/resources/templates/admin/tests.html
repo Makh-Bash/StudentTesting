@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Тесты</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/admin/tests}">
+    <label for="query">Введите поисковый запрос</label>
+    <input type="text" name="query" id="query">
+    <br>
+    <input type="submit" value="Поиск">
+</form>
+
+<div th:if="${tests}">
+    <div th:if="${tests.isEmpty()}">
+        <p>По вашему запросу ничего не найдено</p>
+    </div>
+
+    <div th:if="${!tests.isEmpty()}">
+        <p th:text="${'По вашему запросу найдено ' + tests.size() + ' результат(ов)'}"></p>
+    </div>
+
+    <div th:each="test : ${tests}">
+        <p th:text="${'Название: ' + test.title}">TEST TITLE</p>
+        <p th:text="${'Имя автора: ' + test.owner.firstName + ' ' + test.owner.lastName}">TEST AUTHOR</p>
+        <p th:text="${'ID: ' + test.id}">TEST ID</p>
+
+        <form th:method="DELETE" th:action="@{/admin/tests/{id}(id=${test.id})}">
+            <input type="submit" value="Удалить" style="color: red">
+        </form>
+        <hr>
+
+    </div>
+</div>
+
+</body>
+</html>

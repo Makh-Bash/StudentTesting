@@ -12,9 +12,4 @@ public class StudentTestingApplication {
 		SpringApplication.run(StudentTestingApplication.class, args);
 	}
 
-//	TODO выяснить как работает
-	@Bean
-	HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-		return new HiddenHttpMethodFilter();
-	}
 }

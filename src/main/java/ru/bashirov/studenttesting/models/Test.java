@@ -49,6 +49,12 @@ public final class Test {
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Question> questions;
 
+    @Transient
+    private int countOfCurrentUserDecisions;
+
+    @Transient
+    private int bestDecisionOfCurrentUser;
+
 
     public Test(String title, TestCategory category, int countOfQuestions, Date dateOfCreation, User owner) {
         this.title = title;
@@ -122,5 +128,21 @@ public final class Test {
 
     public void setCategory(TestCategory testCategory) {
         this.category = testCategory;
+    }
+
+    public int getCountOfCurrentUserDecisions() {
+        return countOfCurrentUserDecisions;
+    }
+
+    public void setCountOfCurrentUserDecisions(int countOfCurrentUserDecisions) {
+        this.countOfCurrentUserDecisions = countOfCurrentUserDecisions;
+    }
+
+    public int getBestDecisionOfCurrentUser() {
+        return bestDecisionOfCurrentUser;
+    }
+
+    public void setBestDecisionOfCurrentUser(int bestDecisionOfCurrentUser) {
+        this.bestDecisionOfCurrentUser = bestDecisionOfCurrentUser;
     }
 }

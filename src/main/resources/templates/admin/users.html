@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/admin/users}">
+    <label for="query">Введите поисковый запрос</label>
+    <input type="text" name="query" id="query">
+    <br>
+    <input type="submit" value="Поиск">
+</form>
+
+<div th:if="${users}">
+    <div th:if="${users.isEmpty()}">
+        <p>По вашему запросу ничего не найдено</p>
+    </div>
+
+    <div th:if="${!users.isEmpty()}">
+        <p th:text="${'По вашему запросу найдено ' + users.size() + ' результат(ов)'}"></p>
+    </div>
+
+    <div th:each="user : ${users}">
+        <p th:text="${'Логин: ' + user.login}">USER LOGIN</p>
+        <p th:text="${'Почта: ' + user.email}">USER EMAIL</p>
+        <p th:text="${'Имя и фамилия: ' + user.firstName + ' ' + user.lastName}">USER NAME</p>
+
+        <form th:method="PATCH" th:action="@{/admin/users/{id}(id=${user.id})}">
+            <input type="submit" value="Заблокировать" style="color: red">
+        </form>
+
+        <form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.id})}">
+            <input type="submit" value="Удалить из базы данных" style="color: red">
+        </form>
+
+
+        <hr>
+    </div>
+
+
+</div>
+
+</body>
+</html>

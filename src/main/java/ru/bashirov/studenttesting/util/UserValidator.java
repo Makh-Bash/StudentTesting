@@ -33,11 +33,16 @@ public class UserValidator implements Validator {
         User user = (User) target;
 
         try {
-            UserDetails findUser = userDetailService.loadUserByUsername(user.getLogin());
-        } catch (UsernameNotFoundException ignored) {
-            return;
-        }
+            UserDetails findUserByUsername = userDetailService.loadUserByUsername(user.getLogin());
+            errors.rejectValue("login", "", "Этот логин уже занят");
 
-        errors.rejectValue("login", "", "Этот логин уже занят");
+        } catch (UsernameNotFoundException ignored) {
+            try {
+                UserDetails findUserByEmail = userDetailService.loadUserByEmail(user.getEmail());
+                errors.rejectValue("email", "", "Эта почта уже занята");
+            } catch (UsernameNotFoundException ignored2) {
+                return;
+            }
+        }
     }
 }

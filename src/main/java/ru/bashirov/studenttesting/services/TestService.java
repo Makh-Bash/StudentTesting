@@ -104,4 +104,8 @@ public class TestService {
                     });
         });
     }
+
+    public List<Test> getTestsByTitleStartingWith(String query) {
+        return testsRepository.findAllByTitleStartingWith(query);
+    }
 }

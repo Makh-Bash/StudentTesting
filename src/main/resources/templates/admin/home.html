@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Кабинет администратора</title>
+</head>
+<body>
+<p th:text="${'Общее количество пользователей: ' + usersCount}"></p>
+<p th:text="${'Количество студентов/учеников: ' + studentsCount}"></p>
+<p th:text="${'Количество учителей/составителей теста: ' + teachersCount}"></p>
+
+<form th:method="GET" th:action="@{/admin/users}">
+    <input type="submit" value="Пользователи">
+</form>
+
+<form th:method="GET" th:action="@{/admin/tests}">
+    <input type="submit" value="Тесты">
+</form>
+
+
+</body>
+</html>

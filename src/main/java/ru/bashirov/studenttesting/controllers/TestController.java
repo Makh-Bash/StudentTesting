@@ -5,12 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.bashirov.studenttesting.models.AnswersList;
+import ru.bashirov.studenttesting.models.Decision;
 import ru.bashirov.studenttesting.models.Question;
+import ru.bashirov.studenttesting.models.Test;
 import ru.bashirov.studenttesting.services.DecisionService;
 import ru.bashirov.studenttesting.services.QuestionService;
 import ru.bashirov.studenttesting.services.TestService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/test")
@@ -31,7 +34,14 @@ public class TestController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("tests", testService.findAll());
+        List<Test> tests = testService.findAll();
+
+        tests.forEach(test -> {
+            test.setCountOfCurrentUserDecisions(decisionService.findCountOfDecisionsByUser(test));
+            test.setBestDecisionOfCurrentUser(decisionService.findBestDecisionByUser(test));
+        });
+
+        model.addAttribute("tests", tests);
         return "tests/index";
     }
 
@@ -61,7 +71,7 @@ public class TestController {
         String resultInfo = rightAnswersCount + "/" + answersList.getAllQuestionsCount();
 
 
-        decisionService.save(answersList);
+        decisionService.save(answersList, rightAnswersCount);
         testService.countUp(id);
         model.addAttribute("resultInfo", resultInfo);
         return "/tests/result";

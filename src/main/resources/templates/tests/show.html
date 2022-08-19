@@ -10,14 +10,16 @@
 </div>
 
 <div th:if="${!answersList.getAnswers().isEmpty()}">
+    <!-- TODO поменять расположение-->
     <form th:method="POST" th:action="@{/test/{id}/show(id=${answersList.answers.get(0).getTest().getId()})}" th:object="${answersList}">
-<!-- TODO поменять расположение-->
+        <input type="hidden" th:field="*{allQuestionsCount}">
+        <input type="hidden" th:field="*{answers[__${0}__].test}">
         <div th:each="question,iterstat : *{answers}">
             <p th:text="${question.getTitle()}"></p>
             <input type="hidden" th:field="*{answers[__${iterstat.index}__].correctAnswerId}">
-            <input type="hidden" th:field="*{allQuestionsCount}">
+
             <span th:text="${question.getFirstAnswer()}"></span>
-            <input type="radio" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="1" checked><br>
+            <input type="radio" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="1"><br>
 
             <span th:text="${question.getSecondAnswer ()}"></span>
             <input type="radio" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="2"><br>
