@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя страница</title>
+</head>
+<body>
+<div th:if="${user}">
+  <p th:text="${'Имя: ' + user.firstName + ' ' + user.lastName}"></p>
+  <p th:text="${'Логин: ' + user.login}"></p>
+  <p th:text="${'Email: ' + user.email}"></p>
+  <p th:text="${'Дата рождения: ' + user.yearOfBirth}"></p>
+  <p th:text="${'Ваш статус: ' + role}"></p>
+  <br>
+
+  <form th:method="GET" th:action="@{/user/edit}">
+    <input type="submit" value="Редактировать">
+  </form>
+
+</div>
+</body>
+</html>

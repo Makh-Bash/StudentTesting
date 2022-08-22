@@ -43,14 +43,6 @@ public class TeacherController {
     }
 
 
-//    @PostMapping("/{id}")
-//    public String _index(@PathVariable("id") int id) {
-//        //
-////        testService.deleteById(id);
-//        System.out.println("метод post id = " + id);
-//        return "redirect:/teacher";
-//    }
-
     @PatchMapping("/{id}")
     public String update(@PathVariable("id") int id,
                          @ModelAttribute("test") @Valid Test test,

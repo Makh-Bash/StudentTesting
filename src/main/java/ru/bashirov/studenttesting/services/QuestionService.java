@@ -1,6 +1,7 @@
 package ru.bashirov.studenttesting.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bashirov.studenttesting.models.Question;
@@ -20,6 +21,6 @@ public class QuestionService {
     }
 
     public List<Question> findAllByTestId(int id) {
-        return questionsRepository.findByTestId(id);
+        return questionsRepository.findByTestId(id, Sort.by("numberOfQuestion"));
     }
 }

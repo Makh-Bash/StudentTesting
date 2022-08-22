@@ -15,6 +15,7 @@
         <input type="hidden" th:field="*{allQuestionsCount}">
         <input type="hidden" th:field="*{answers[__${0}__].test}">
         <div th:each="question,iterstat : *{answers}">
+            <p th:text="${'Вопрос №' + question.numberOfQuestion}"></p>
             <p th:text="${question.getTitle()}"></p>
             <input type="hidden" th:field="*{answers[__${iterstat.index}__].correctAnswerId}">
 

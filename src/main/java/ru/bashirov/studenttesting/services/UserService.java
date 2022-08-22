@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class UserService {
 
     private final UsersRepository usersRepository;
@@ -49,16 +50,31 @@ public class UserService {
         return usersRepository.findByLoginStartingWith(query);
     }
 
+    @Transactional
     public void deleteById(int id) {
         usersRepository.deleteById(id);
     }
 
     @Transactional
-    public void baneUserById(int id) {
+    public void disableUserById(int id) {
         Optional<User> user = usersRepository.findById(id);
         user.ifPresent(findUser -> {
             findUser.setRole("ROLE_DISABLED");
             usersRepository.save(user.get());
+        });
+    }
+
+    @Transactional
+    public void update(User user) {
+        Optional<User> findUser = usersRepository.findById(user.getId());
+
+        findUser.ifPresent(value -> {
+            value.setFirstName(user.getFirstName());
+            value.setLastName(user.getLastName());
+
+            getCurrentUser().setFirstName(user.getFirstName());
+            getCurrentUser().setLastName(user.getLastName());
+            usersRepository.save(value);
         });
     }
 }

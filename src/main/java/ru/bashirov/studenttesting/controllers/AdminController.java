@@ -66,7 +66,7 @@ public class AdminController {
 
     @PatchMapping("users/{id}")
     public String baneUser(@PathVariable("id") int id) {
-        userService.baneUserById(id);
+        userService.disableUserById(id);
         return "redirect:/admin/users";
     }
 

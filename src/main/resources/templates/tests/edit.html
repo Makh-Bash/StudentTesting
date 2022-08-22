@@ -16,7 +16,7 @@
 
     <div th:each="question, iterstat : *{questions}">
       <input type="hidden" th:field="*{questions[__${iterstat.index}__].id}">
-      <input type="hidden" th:field="*{questions[__${iterstat.index}__].number_of_question}">
+      <input type="hidden" th:field="*{questions[__${iterstat.index}__].numberOfQuestion}">
 <!--      <input type="hidden" th:field="*{questions[__${iterstat.index}__].}">-->
 
       <label for="title">Вопрос №</label><span th:text="${iterstat.index+1}"></span>

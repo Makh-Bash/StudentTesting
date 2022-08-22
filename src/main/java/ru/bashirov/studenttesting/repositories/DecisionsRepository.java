@@ -2,7 +2,6 @@ package ru.bashirov.studenttesting.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.bashirov.studenttesting.models.Decision;
 import ru.bashirov.studenttesting.models.Test;
@@ -22,5 +21,4 @@ public interface DecisionsRepository extends JpaRepository<Decision, Integer> {
 
 //    int findTopByCountOfRightAnswersAndPersonAndTest(User user, Test test);
 
-//    int
 }

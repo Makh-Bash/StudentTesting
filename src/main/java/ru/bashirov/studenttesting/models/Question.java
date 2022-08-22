@@ -21,7 +21,7 @@ public final class Question {
     private String title;
 
     @Column(name = "number_of_question")
-    private int number_of_question;
+    private int numberOfQuestion;
 
     @Column(name = "correct_answer_id")
     @Min(value = 1, message = "Минимальный номер ответа должен быть не меньше 1")
@@ -61,7 +61,7 @@ public final class Question {
 
     public Question(String title, int number_of_question, int correctAnswerId, String firstAnswer, String secondAnswer, String thirdAnswer, String fourthAnswer, Test test) {
         this.title = title;
-        this.number_of_question = number_of_question;
+        this.numberOfQuestion = number_of_question;
         this.correctAnswerId = correctAnswerId;
         this.firstAnswer = firstAnswer;
         this.secondAnswer = secondAnswer;
@@ -88,12 +88,12 @@ public final class Question {
         this.title = title;
     }
 
-    public int getNumber_of_question() {
-        return number_of_question;
+    public int getNumberOfQuestion() {
+        return numberOfQuestion;
     }
 
-    public void setNumber_of_question(int number_of_question) {
-        this.number_of_question = number_of_question;
+    public void setNumberOfQuestion(int numberOfQuestion) {
+        this.numberOfQuestion = numberOfQuestion;
     }
 
     public int getCorrectAnswerId() {

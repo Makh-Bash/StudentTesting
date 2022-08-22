@@ -11,9 +11,9 @@ public class MainController {
         return "main/index";
     }
 
-//    @GetMapping("/error")
-//    public String errorPage() {
-//        return "main/error";
-//    }
+    @GetMapping("/error")
+    public String errorPage() {
+        return "main/error";
+    }
 
 }

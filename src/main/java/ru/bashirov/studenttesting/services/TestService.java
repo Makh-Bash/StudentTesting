@@ -1,18 +1,14 @@
 package ru.bashirov.studenttesting.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.bashirov.studenttesting.models.Question;
 import ru.bashirov.studenttesting.models.Test;
 import ru.bashirov.studenttesting.models.TestCategory;
-import ru.bashirov.studenttesting.models.User;
 import ru.bashirov.studenttesting.repositories.QuestionsRepository;
 import ru.bashirov.studenttesting.repositories.TestCategoryRepository;
 import ru.bashirov.studenttesting.repositories.TestsRepository;
-import ru.bashirov.studenttesting.sequrity.UserDetails;
 
 import java.util.Date;
 import java.util.List;
@@ -37,7 +33,7 @@ public class TestService {
     }
 
     public List<Test> findAll() {
-        return testsRepository.findAll();
+        return testsRepository.findAll(Sort.by("title"));
     }
 
     public Optional<Test> findById(int id) {
@@ -69,7 +65,7 @@ public class TestService {
         AtomicInteger counter = new AtomicInteger(1);
         test.getQuestions().forEach(question -> {
             question.setTest(test);
-            question.setNumber_of_question(counter.getAndIncrement());
+            question.setNumberOfQuestion(counter.getAndIncrement());
         });
 
         questionsRepository.saveAll(test.getQuestions());
@@ -79,12 +75,11 @@ public class TestService {
 
     @Transactional
     public void deleteById(Integer id) {
-        System.out.println("Удаление элементов");
         questionsRepository.deleteAllByTestId(id);
         testsRepository.deleteById(id);
     }
 
-    //   TODO рефактор
+    //    TODO рефактор
     @Transactional
     public void update(int id, Test test) {
         test.setId(id);
