@@ -5,6 +5,8 @@
     <title>Тесты</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
 
 <form th:method="POST" th:action="@{/admin/tests}">
     <label for="query">Введите поисковый запрос</label>
@@ -35,5 +37,6 @@
     </div>
 </div>
 
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

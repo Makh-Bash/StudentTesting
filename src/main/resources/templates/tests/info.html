@@ -5,6 +5,7 @@
     <title>Тестирование</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 
 <div th:if="${test.isEmpty()}">
     <p>Извините, данный тест не существует или был удален</p>
@@ -37,5 +38,6 @@
 </div>
 
 
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

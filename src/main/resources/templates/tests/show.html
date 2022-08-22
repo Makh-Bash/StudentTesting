@@ -5,6 +5,9 @@
     <title>Решение теста</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
+
 <div th:if="${answersList.getAnswers().isEmpty()}">
     <p>Извините, но данный тест сейчас недоступен</p>
 </div>
@@ -38,5 +41,6 @@
 </div>
 
 
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

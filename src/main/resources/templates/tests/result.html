@@ -5,8 +5,11 @@
     <title>Результат</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
 <a th:href="@{/}">Вернуться на главную</a>
-    <p>Ваш результат: </p>
-    <p th:text="${resultInfo}"></p>
+<p>Ваш результат: </p>
+<p th:text="${resultInfo}"></p>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

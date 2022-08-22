@@ -5,8 +5,9 @@
     <title>Тесты</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
 <p>Тесты</p>
-<a th:href="@{/}">Главная</a>
 
 <div th:if="${tests.isEmpty()}">
     <p>Извините, тестирование на данный момент недоступно</p>
@@ -33,5 +34,6 @@
         <hr>
     </div>
 </div>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

@@ -5,6 +5,8 @@
     <title>Пользователи</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
 
 <form th:method="POST" th:action="@{/admin/users}">
     <label for="query">Введите поисковый запрос</label>
@@ -42,5 +44,6 @@
 
 </div>
 
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

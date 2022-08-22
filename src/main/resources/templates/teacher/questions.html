@@ -5,6 +5,8 @@
     <title>Новый тест</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
 <form th:method="POST" th:action="@{/teacher/add}" th:object="${test}">
     <input type="hidden" th:field="*{owner}">
     <input type="hidden" th:field="*{countOfQuestions}">
@@ -38,5 +40,6 @@
     </div>
     <input type="submit" value="Создать">
 </form>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

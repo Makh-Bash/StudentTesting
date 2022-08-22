@@ -5,6 +5,9 @@
     <title>Моя страница</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
+
 <div th:if="${user}">
   <p th:text="${'Имя: ' + user.firstName + ' ' + user.lastName}"></p>
   <p th:text="${'Логин: ' + user.login}"></p>
@@ -18,5 +21,6 @@
   </form>
 
 </div>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

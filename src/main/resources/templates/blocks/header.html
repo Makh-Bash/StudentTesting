@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Th header</title>
+</head>
+<body>
+<div th:fragment="header">
+    <div>
+        <h1>Шапка сайта</h1>
+    </div>
+    <div th:if="${#authentication.name.equals('anonymousUser')}">
+        <p>Зарегистрироваться</p>
+    </div>
+
+    <div th:if="${!#authentication.name.equals('anonymousUser')}" >
+        <p th:text="${#authentication.name}"></p>
+        <a th:href="@{/test}">Тесты</a><br>
+
+        <a th:href="@{/user/}" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_USER')">Мой профиль<br></a>
+        <a th:href="@{/teacher/}" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')">Мои тесты<br></a>
+        <a th:href="@{/teacher/new}" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')">Создать новый тест<br></a>
+        <a th:href="@{/admin/}" sec:authorize="hasRole('ROLE_ADMIN')">Кабинет администратора <br></a>
+    </div>
+    <hr>
+</div>
+</body>
+</html>
+

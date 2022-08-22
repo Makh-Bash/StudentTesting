@@ -5,6 +5,9 @@
     <title>Мои тесты</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
+
 <div th:if="${tests.isEmpty()}">
     <p>У вас пока нет собственных тестов</p>
 </div>
@@ -31,5 +34,6 @@
 
 </div>
 <a th:href="@{/}">Главное меню</a>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

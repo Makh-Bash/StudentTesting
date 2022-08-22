@@ -5,6 +5,8 @@
     <title>Новый тест</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
 <form th:method="POST" th:action="@{/teacher/new}" th:object="${test}">
   <input type="hidden" th:field="*{owner}">
   <label for="title">Название теста</label>
@@ -24,5 +26,6 @@
   <input type="submit" value="Продолжить">
 
 </form>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

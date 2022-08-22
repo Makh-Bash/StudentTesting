@@ -5,6 +5,9 @@
     <title>Кабинет администратора</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
+
 <p th:text="${'Общее количество пользователей: ' + usersCount}"></p>
 <p th:text="${'Количество студентов/учеников: ' + studentsCount}"></p>
 <p th:text="${'Количество учителей/составителей теста: ' + teachersCount}"></p>
@@ -17,6 +20,6 @@
     <input type="submit" value="Тесты">
 </form>
 
-
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

@@ -5,6 +5,9 @@
     <title>Редактирование</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
+
+
 <form th:if="${user}" th:method="PATCH" th:action="@{/user/edit}" th:object="${user}">
 
     <input type="hidden" th:field="*{id}">
@@ -24,5 +27,6 @@
     <input type="submit" value="Обновить">
 
 </form>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>
