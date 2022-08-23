@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Решение теста</title>
 
+    <link rel="stylesheet" href="../../static/css/mainStyle.css" th:href="@{/css/mainStyle.css}">
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
@@ -15,40 +18,47 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-
-<div th:if="${answersList.getAnswers().isEmpty()}">
-    <p>Извините, но данный тест сейчас недоступен</p>
-</div>
-
-<div th:if="${!answersList.getAnswers().isEmpty()}">
-    <!-- TODO поменять расположение-->
-    <form th:method="POST" th:action="@{/test/{id}/show(id=${answersList.answers.get(0).getTest().getId()})}" th:object="${answersList}">
-        <input type="hidden" th:field="*{allQuestionsCount}">
-        <input type="hidden" th:field="*{answers[__${0}__].test}">
-        <div th:each="question,iterstat : *{answers}">
-            <p th:text="${'Вопрос №' + question.numberOfQuestion}"></p>
-            <p th:text="${question.getTitle()}"></p>
-            <input type="hidden" th:field="*{answers[__${iterstat.index}__].correctAnswerId}">
-
-            <span th:text="${question.getFirstAnswer()}"></span>
-            <input type="radio" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="1"><br>
-
-            <span th:text="${question.getSecondAnswer ()}"></span>
-            <input type="radio" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="2"><br>
-
-            <span th:text="${question.getThirdAnswer()}"></span>
-            <input type="radio" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="3"><br>
-
-            <span th:text="${question.getFourthAnswer()}"></span>
-            <input type="radio" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="4"><br>
-            <hr>
-
+<main>
+    <div class="container mt-5">
+        <div class="text-center text-danger" th:if="${answersList.getAnswers().isEmpty()}">
+            <p>Извините, но данный тест сейчас недоступен</p>
         </div>
-        <input type="submit" value="Отправить ответы">
-    </form>
-</div>
 
+        <div th:if="${!answersList.getAnswers().isEmpty()}">
+            <!-- TODO поменять расположение-->
+            <form th:method="POST" th:action="@{/test/{id}/show(id=${answersList.answers.get(0).test.id})}"
+                  th:object="${answersList}">
 
+                <input type="hidden" th:field="*{allQuestionsCount}">
+                <input type="hidden" th:field="*{answers[__${0}__].test}">
+
+                <div th:each="question,iterstat : *{answers}">
+                    <p th:text="${'Вопрос №' + question.numberOfQuestion}">QUESTION NUMBER</p>
+                    <div class="card mt-2 mb-5">
+                        <input type="hidden" th:field="*{answers[__${iterstat.index}__].correctAnswerId}">
+                        <div class="card-header">
+                            <span th:text="${question.getTitle()}">TITLE</span>
+                        </div>
+                        <div class="card-body">
+                            <input type="radio" class="form-check-input" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="1">
+                            <span th:text="${question.firstAnswer}">1 ANSWER</span><br>
+
+                            <input type="radio" class="form-check-input" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="2">
+                            <span th:text="${question.secondAnswer}">2 ANSWER</span><br>
+
+                            <input type="radio" class="form-check-input" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="3">
+                            <span th:text="${question.thirdAnswer}">3 ANSWER</span><br>
+
+                            <input type="radio" class="form-check-input" th:field="*{answers[__${iterstat.index}__].chooseAnswer}" value="4">
+                            <span th:text="${question.fourthAnswer}">4 ANSWER</span><br>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-outline-success mb-5" value="Отправить ответы">
+            </form>
+        </div>
+    </div>
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

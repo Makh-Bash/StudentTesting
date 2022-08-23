@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Моя страница</title>
 
+    <link rel="stylesheet" href="../../static/css/mainStyle.css" th:href="@{/css/mainStyle.css}">
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
@@ -15,20 +18,32 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
+<main>
 
-<div th:if="${user}">
-    <p th:text="${'Имя: ' + user.firstName + ' ' + user.lastName}"></p>
-    <p th:text="${'Логин: ' + user.login}"></p>
-    <p th:text="${'Email: ' + user.email}"></p>
-    <p th:text="${'Дата рождения: ' + user.yearOfBirth}"></p>
-    <p th:text="${'Ваш статус: ' + role}"></p>
-    <br>
+    <div th:if="${user}" class="container border border-3 rounded-2 bg-light col-lg-6 col-xs-9 pt-3 mt-5">
+        <h4>Профиль</h4>
+        <hr>
 
-    <form th:method="GET" th:action="@{/user/edit}">
-        <input type="submit" value="Редактировать">
-    </form>
+        <p th:text="${'Имя: ' + user.firstName + ' ' + user.lastName}">f</p>
+        <p th:text="${'Логин: ' + user.login}">sf</p>
+        <p th:text="${'Email: ' + user.email}">s</p>
+        <p th:text="${'Дата рождения: ' + user.yearOfBirth}"></p>
+        <p th:text="${'Ваш статус: ' + role}"></p>
+        <br>
+        <div class="row  mb-2 justify-content-between">
+            <form th:method="GET" th:action="@{/user/edit}" class="justify-content-center col-xl-4 col-sm-5 mb-2">
+                <input class="btn btn-outline-success col-12" type="submit" value="Редактировать">
+            </form>
 
-</div>
+            <form th:method="POST" th:action="@{/logout}" class="justify-content-center col-xl-4 col-sm-5 mb-2">
+                <input class="btn btn-outline-danger col-12" type="submit" value="Выйти с аккаунта">
+            </form>
+        </div>
+
+
+    </div>
+</main>
+
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

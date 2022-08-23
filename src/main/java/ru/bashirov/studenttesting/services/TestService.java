@@ -56,7 +56,6 @@ public class TestService {
     }
 
 
-
     @Transactional
     public void save(Test test) {
         test.setCountOfDecisions(0);
@@ -84,20 +83,18 @@ public class TestService {
     public void update(int id, Test test) {
         test.setId(id);
         testsRepository.save(test);
-        test.getQuestions().forEach(question -> {
-            questionsRepository
-                    .findById(question.getId())
-                    .ifPresent(value -> {
-                        value.setTitle(question.getTitle());
-                        value.setFirstAnswer(question.getFirstAnswer());
-                        value.setSecondAnswer(question.getSecondAnswer());
-                        value.setThirdAnswer(question.getThirdAnswer());
-                        value.setFourthAnswer(question.getFourthAnswer());
-                        value.setCorrectAnswerId(question.getCorrectAnswerId());
+        test.getQuestions().forEach(question -> questionsRepository
+                .findById(question.getId())
+                .ifPresent(value -> {
+                    value.setTitle(question.getTitle());
+                    value.setFirstAnswer(question.getFirstAnswer());
+                    value.setSecondAnswer(question.getSecondAnswer());
+                    value.setThirdAnswer(question.getThirdAnswer());
+                    value.setFourthAnswer(question.getFourthAnswer());
+                    value.setCorrectAnswerId(question.getCorrectAnswerId());
 
-                        questionsRepository.save(value);
-                    });
-        });
+                    questionsRepository.save(value);
+                }));
     }
 
     public List<Test> getTestsByTitleStartingWith(String query) {

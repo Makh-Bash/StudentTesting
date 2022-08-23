@@ -1,0 +1,32 @@
+* {
+
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    min-height: 50px;
+}
+
+footer {
+    min-height: 50px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+#imageCover {
+    background-image: url("../images/white-abstract-background-design_23-2148825582.webp");
+    background-size: cover;
+    min-height: 700px;
+
+}

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Редактирование</title>
 
+    <link rel="stylesheet" href="../../static/css/mainStyle.css" th:href="@{/css/mainStyle.css}">
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
@@ -17,22 +20,25 @@
 
 
 <form th:if="${user}" th:method="PATCH" th:action="@{/user/edit}" th:object="${user}">
+    <div class="container border border-3 rounded-2 bg-light col-lg-6 col-xs-9 pt-3 mt-5 pb-2">
+        <h4>Редактирование</h4>
+        <hr>
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{yearOfBirth}">
+        <input type="hidden" th:field="*{email}">
+        <input type="hidden" th:field="*{password}">
+        <input type="hidden" th:field="*{login}">
 
-    <input type="hidden" th:field="*{id}">
-    <input type="hidden" th:field="*{yearOfBirth}">
-    <input type="hidden" th:field="*{email}">
-    <input type="hidden" th:field="*{password}">
-    <input type="hidden" th:field="*{login}">
-
-    <label for="firstName">Введите имя:</label>
-    <input type="text" th:field="*{firstName}" id="firstName">
-    <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FIRSTNAME ERROR</div>
-    <br>
-    <label for="lastName">Введите фамилию:</label>
-    <input type="text" th:field="*{lastName}" id="lastName">
-    <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LASTNAME ERROR</div>
-    <br>
-    <input type="submit" value="Обновить">
+        <label for="firstName" class="form-label">Введите новое имя:</label><br>
+        <input class="mb-4 form-control" type="text" th:field="*{firstName}" id="firstName">
+        <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FIRSTNAME ERROR</div>
+        <br>
+        <label for="lastName" class="form-label">Введите новую фамилию:</label><br>
+        <input class="mb-4 form-control" type="text" th:field="*{lastName}" id="lastName">
+        <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LASTNAME ERROR</div>
+        <br>
+        <input type="submit" class="btn btn-outline-success" value="Обновить">
+    </div>
 
 </form>
 <footer th:insert="blocks/footer :: footer"></footer>
