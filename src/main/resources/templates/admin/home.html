@@ -19,19 +19,26 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
+<main>
+    <div class="container border border-3 rounded-2 bg-light col-lg-6 col-xs-9 pt-3 mt-5">
+        <h4>Информация</h4>
+        <hr>
+        <p th:text="${'Общее количество пользователей: ' + usersCount}"></p>
+        <p th:text="${'Количество студентов/учеников: ' + studentsCount}"></p>
+        <p th:text="${'Количество учителей/составителей тестов: ' + teachersCount}"></p>
 
-<p th:text="${'Общее количество пользователей: ' + usersCount}"></p>
-<p th:text="${'Количество студентов/учеников: ' + studentsCount}"></p>
-<p th:text="${'Количество учителей/составителей теста: ' + teachersCount}"></p>
+        <div class="row mb-2 justify-content-between">
 
-<form th:method="GET" th:action="@{/admin/users}">
-    <input type="submit" value="Пользователи">
-</form>
+            <form th:method="GET" th:action="@{/admin/users}" class="justify-content-center col-xl-4 col-sm-5 mb-2">
+                <input class="btn btn-outline-primary col-12" type="submit" value="Пользователи">
+            </form>
 
-<form th:method="GET" th:action="@{/admin/tests}">
-    <input type="submit" value="Тесты">
-</form>
-
+            <form th:method="GET" th:action="@{/admin/tests}" class="justify-content-center col-xl-4 col-sm-5 mb-2">
+                <input class="btn btn-outline-primary col-12" type="submit" value="Тесты">
+            </form>
+        </div>
+    </div>
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

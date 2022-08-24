@@ -18,43 +18,56 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-
-<form th:method="POST" th:action="@{/admin/users}">
-    <label for="query">Введите поисковый запрос</label>
-    <input type="text" name="query" id="query">
-    <br>
-    <input type="submit" value="Поиск">
-</form>
-
-<div th:if="${users}">
-    <div th:if="${users.isEmpty()}">
-        <p>По вашему запросу ничего не найдено</p>
-    </div>
-
-    <div th:if="${!users.isEmpty()}">
-        <p th:text="${'По вашему запросу найдено ' + users.size() + ' результат(ов)'}"></p>
-    </div>
-
-    <div th:each="user : ${users}">
-        <p th:text="${'Логин: ' + user.login}">USER LOGIN</p>
-        <p th:text="${'Почта: ' + user.email}">USER EMAIL</p>
-        <p th:text="${'Имя и фамилия: ' + user.firstName + ' ' + user.lastName}">USER NAME</p>
-
-        <form th:method="PATCH" th:action="@{/admin/users/{id}(id=${user.id})}">
-            <input type="submit" value="Заблокировать" style="color: red">
-        </form>
-
-        <form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.id})}">
-            <input type="submit" value="Удалить из базы данных" style="color: red">
-        </form>
-
-
+<main>
+    <div class="container col-lg-6 col-xs-9 pt-3 mt-5">
+        <h4>Пользователи</h4>
         <hr>
+        <div class="p-3 mb-4  border border-3 rounded-2 bg-light">
+            <form th:method="POST" th:action="@{/admin/users}">
+                <label class="form-label" for="query">Поиск по логину</label>
+                <input class="form-control" placeholder="Введите поисковый запрос" type="text" name="query" id="query">
+                <br>
+                <input class="btn btn-outline-primary" type="submit" value="Поиск">
+            </form>
+        </div>
+
+        <div th:if="${users}">
+            <div th:if="${users.isEmpty()}">
+                <p class="text-danger">По вашему запросу ничего не найдено</p>
+            </div>
+
+            <div th:if="${!users.isEmpty()}">
+                <p th:text="${'По вашему запросу найдено ' + users.size() + ' результат(ов)'}"></p>
+
+
+                <div class="p-3 mb-4  border border-3 rounded-2 bg-light" th:each="user : ${users}">
+                    <p th:text="${'Логин: ' + user.login}">USER LOGIN</p>
+                    <p th:text="${'Почта: ' + user.email}">USER EMAIL</p>
+                    <p th:text="${'Имя и фамилия: ' + user.firstName + ' ' + user.lastName}">USER NAME</p>
+
+                    <p class="text-danger" th:if="${user.role.equals('ROLE_ADMIN')}">Администратор</p>
+                    <p class="text-success" th:if="${user.role.equals('ROLE_TEACHER')}">Учитель</p>
+                    <p class="" th:if="${user.role.equals('ROLE_USER')}">Студент</p>
+
+                    <div class="row mb-2 justify-content-between">
+                        <form th:method="PATCH" th:if="${!user.role.equals('ROLE_ADMIN')}"
+                              th:action="@{/admin/users/{id}(id=${user.id})}"
+                              class="justify-content-center col-xl-4 col-sm-5 mb-2">
+                            <input type="submit" value="Заблокировать" class="btn btn-outline-danger col-12">
+                        </form>
+
+                        <form th:method="DELETE" th:if="${!user.role.equals('ROLE_ADMIN')}"
+                              th:action="@{/admin/users/{id}(id=${user.id})}"
+                              class="justify-content-center col-xl-4 col-sm-5 mb-2">
+                            <input type="submit" value="Удалить из базы данных" class="btn btn-outline-warning col-12">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-</div>
-
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

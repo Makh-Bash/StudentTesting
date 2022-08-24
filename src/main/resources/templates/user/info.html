@@ -30,7 +30,7 @@
         <p th:text="${'Дата рождения: ' + user.yearOfBirth}"></p>
         <p th:text="${'Ваш статус: ' + role}"></p>
         <br>
-        <div class="row  mb-2 justify-content-between">
+        <div class="row mb-2 justify-content-between">
             <form th:method="GET" th:action="@{/user/edit}" class="justify-content-center col-xl-4 col-sm-5 mb-2">
                 <input class="btn btn-outline-success col-12" type="submit" value="Редактировать">
             </form>

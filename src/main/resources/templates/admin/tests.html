@@ -19,36 +19,43 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-
-<form th:method="POST" th:action="@{/admin/tests}">
-    <label for="query">Введите поисковый запрос</label>
-    <input type="text" name="query" id="query">
-    <br>
-    <input type="submit" value="Поиск">
-</form>
-
-<div th:if="${tests}">
-    <div th:if="${tests.isEmpty()}">
-        <p>По вашему запросу ничего не найдено</p>
-    </div>
-
-    <div th:if="${!tests.isEmpty()}">
-        <p th:text="${'По вашему запросу найдено ' + tests.size() + ' результат(ов)'}"></p>
-    </div>
-
-    <div th:each="test : ${tests}">
-        <p th:text="${'Название: ' + test.title}">TEST TITLE</p>
-        <p th:text="${'Имя автора: ' + test.owner.firstName + ' ' + test.owner.lastName}">TEST AUTHOR</p>
-        <p th:text="${'ID: ' + test.id}">TEST ID</p>
-
-        <form th:method="DELETE" th:action="@{/admin/tests/{id}(id=${test.id})}">
-            <input type="submit" value="Удалить" style="color: red">
-        </form>
+<main>
+    <div class="container col-lg-6 col-xs-9 pt-3 mt-5">
+        <h4>Тесты</h4>
         <hr>
+        <div class="p-3 mb-4  border border-3 rounded-2 bg-light">
+            <form th:method="POST" th:action="@{/admin/tests}">
+                <label class="form-label" for="query">Поиск по названию</label>
+                <input class="form-control" placeholder="Введите поисковый запрос" type="text" name="query" id="query">
+                <br>
+                <input class="btn btn-outline-primary" type="submit" value="Поиск">
+            </form>
+        </div>
 
+        <div th:if="${tests}">
+            <div th:if="${tests.isEmpty()}">
+                <p class="text-danger">По вашему запросу ничего не найдено</p>
+            </div>
+
+            <div th:if="${!tests.isEmpty()}">
+                <p th:text="${'По вашему запросу найдено ' + tests.size() + ' результат(ов)'}"></p>
+            </div>
+
+            <div class="p-3 mb-4  border border-3 rounded-2 bg-light" th:each="test : ${tests}">
+                <p th:text="${'Название: ' + test.title}">TEST TITLE</p>
+                <p th:text="${'Имя автора: ' + test.owner.firstName + ' ' + test.owner.lastName}">TEST AUTHOR</p>
+                <p th:text="${'ID: ' + test.id}">TEST ID</p>
+                <div class="row mb-2 justify-content-between">
+
+                    <form th:method="DELETE" th:action="@{/admin/tests/{id}(id=${test.id})}">
+                        <input type="submit" value="Удалить" class="btn btn-outline-danger">
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

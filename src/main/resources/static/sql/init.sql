@@ -54,6 +54,7 @@ CREATE TABLE decisions (
 );
 
 INSERT INTO users(first_name, last_name, login, email, password, year_of_birth, time_of_registration, role) VALUES
+-- Пароль у всех "12345"
 ('Джек', 'Смит', 'jack23', 'jack@mail.com', '$2a$10$sINGL2w4dlvwVsQ.Z7wt0.BmMMDal7HRum31Ax91wwdr4v6HUAF6a', '2000-10-20', '2022-07-01 20:05:06', 'ROLE_USER'),
 ('Иван', 'Иванов', 'ivan45', 'ivan@mail.com', '$2a$10$sINGL2w4dlvwVsQ.Z7wt0.BmMMDal7HRum31Ax91wwdr4v6HUAF6a', '2003-11-20', '2022-07-03 20:03:06', 'ROLE_USER'),
 ('Майк', 'Джексон', 'mike2', 'mike@mail.com', '$2a$10$sINGL2w4dlvwVsQ.Z7wt0.BmMMDal7HRum31Ax91wwdr4v6HUAF6a', '1981-10-20', '2022-07-02 16:00:06', 'ROLE_TEACHER'),
