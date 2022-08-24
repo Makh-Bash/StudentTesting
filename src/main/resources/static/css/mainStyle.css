@@ -5,6 +5,7 @@
 body {
     height: 100vh;
     margin: 0;
+    background-color: #ececec !important;
 }
 
 header {

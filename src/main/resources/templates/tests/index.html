@@ -18,37 +18,55 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
+<main>
 
-<div th:if="${tests.isEmpty()}" class="text-danger text-center">
-    <p>Извините, тестирование на данный момент недоступно</p>
-</div>
+    <div>
 
-<div th:if="${!tests.isEmpty()}" class="container col-lg-8 col-sm-12 justify-content-center">
-    <h4 class="mt-4">Все тесты</h4>
-    <hr>
-    <div th:each="test : ${tests}" class="card my-5">
-        <div class="card-header">
-            <span class="text-secondary" th:text="${test.getCategory().title}"></span>
-        </div>
-        <div class="card-body">
-            <h5 class="card-title" th:text="${test.getTitle()}"></h5>
-            <p class="card-text" th:text="${'Количество вопросов: ' + test.getCountOfQuestions()}"></p>
+        <div class="container col-lg-8 col-sm-12 justify-content-center">
+            <form th:method="POST" th:action="@{/test}" class="input-group mt-5 mb-3">
+<!--                                    <label class="form-label" for="query">Поиск по названию</label>-->
+                <input class="form-control" placeholder="Введите поисковый запрос" th:value="${query}"
+                       aria-describedby="button-addon" type="text" name="query" id="query">
+                <button class="btn btn-outline-primary" id="button-addon" type="submit">Поиск</button>
+            </form>
 
-            <p class="card-text text-success" th:if="${test.countOfCurrentUserDecisions==0}">Вы пока не решали данный тест</p>
-            <div th:if="${test.countOfCurrentUserDecisions>0}">
-                <span>Вы решали тест </span>
-                <span th:text="${test.countOfCurrentUserDecisions + 'раз(а).'}"></span>
-                <p></p>
-                <span>Лучший результат </span>
-                <p class="text-info" th:text="${test.bestDecisionOfCurrentUser + ' из ' + test.countOfQuestions}"></p>
+            <h4 class="mt-4" th:if="${query==null}">Все тесты</h4>
+
+            <div class="mt-4" th:if="${query}">
+                <h4 th:if="${!query.isEmpty()}" th:text="${'Результаты по запросу ' + query}"></h4>
+                <h4 th:if="${query.isEmpty()}">Все тесты</h4>
+            </div>
+            <hr>
+            <div th:if="${tests.isEmpty()}" class="text-center">
+                <p>Ничего не найдено по вашему запросу</p>
+            </div>
+            <div th:if="${!tests.isEmpty()}" th:each="test : ${tests}" class="card my-5">
+                <div class="card-header">
+                    <span class="text-secondary" th:text="${test.getCategory().title}"></span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${test.getTitle()}"></h5>
+                    <p class="card-text" th:text="${'Количество вопросов: ' + test.getCountOfQuestions()}"></p>
+
+                    <p class="card-text text-success" th:if="${test.countOfCurrentUserDecisions==0}">Вы пока не решали
+                        данный тест</p>
+                    <div th:if="${test.countOfCurrentUserDecisions>0}">
+                        <span>Вы решали тест </span>
+                        <span th:text="${test.countOfCurrentUserDecisions + 'раз(а).'}"></span>
+                        <p></p>
+                        <span>Лучший результат </span>
+                        <p class="text-info"
+                           th:text="${test.bestDecisionOfCurrentUser + ' из ' + test.countOfQuestions}"></p>
+
+                    </div>
+                    <a class="btn btn-outline-success pe-5 ps-5" th:href="@{test/{id}(id=${test.getId()})}">Решить</a>
+
+                </div>
 
             </div>
-            <a class="btn btn-outline-success pe-5 ps-5" th:href="@{test/{id}(id=${test.getId()})}">Решить</a>
-
         </div>
-
     </div>
-</div>
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

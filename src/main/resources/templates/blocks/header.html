@@ -14,35 +14,43 @@
 </head>
 <body>
 <div th:fragment="header">
-    <nav class="navbar navbar-expand-lg p-2 pe-4 ps-4" style="background-color: #3cd090">
+    <nav class="navbar navbar-expand-xl p-2 pe-4 ps-4" style="background-color: #3cd090">
 
         <div class="col-2">
             <a th:href="@{/}" class="link-dark navbar-brand text-light">StudTesting</a>
         </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
             <span class="navbar-toggler-icon"></span>
         </button>
 
 
         <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
             <div class="navbar-nav">
-                <a class="link-dark nav-link nav-item text-light " th:href="@{/test}">Тесты</a>
-                <a class="link-dark nav-link nav-item  text-light" th:href="@{/user/}"
+                <a class="text-center link-dark nav-link nav-item text-light " th:href="@{/test}">Тесты</a>
+                <a class="text-center link-dark nav-link nav-item  text-light" th:href="@{/user/}"
                    sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_USER')">Мой профиль</a>
-                <a class="link-dark  nav-link nav-item text-light" th:href="@{/teacher/}"
+                <a class="text-center link-dark  nav-link nav-item text-light" th:href="@{/teacher/}"
                    sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')">Мои тесты</a>
-                <a class="link-dark nav-link nav-item text-light " th:href="@{/teacher/new}"
+                <a class="text-center link-dark nav-link nav-item text-light " th:href="@{/teacher/new}"
                    sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')">Создать новый тест</a>
-                <a class="link-dark nav-link nav-item text-light" th:href="@{/admin/}"
-                   sec:authorize="hasRole('ROLE_ADMIN')">Кабинет
+                <a class="text-center link-dark nav-link nav-item text-light" th:href="@{/admin/}"
+                sec:authorize="hasRole('ROLE_ADMIN')">Кабинет
                     администратора </a>
-                <div class="nav-link nav-item" th:if="${!#authentication.name.equals('anonymousUser')}">
-                    <span class="nav-item text-secondary" th:text="${#authentication.name}"></span>
+                <div class="nav-link nav-item text-center" th:if="${!#authentication.name.equals('anonymousUser')}">
+                    <span class="text-center text-light" th:text="${#authentication.name}">sdfd</span>
+                </div>
+
+                <div class="nav-link nav-item p-1" th:if="${!#authentication.name.equals('anonymousUser')}">
+                    <form class="d-flex justify-content-center" th:method="POST" th:action="@{/test}">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Поиск тестов" aria-label="Поиск">
+                        <button class="btn btn-outline-dark" type="submit">Поиск</button>
+                    </form>
                 </div>
 
                 <div class="nav-item" th:if="${#authentication.name.equals('anonymousUser')}">
-                    <a class="link-dark nav-link text-light" th:href="@{/auth/login}">Войти / Зарегистрироваться</a>
+                    <a class="text-center link-dark nav-link text-light" th:href="@{/auth/login}">Войти / Зарегистрироваться</a>
                 </div>
             </div>
 

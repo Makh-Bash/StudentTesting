@@ -45,6 +45,20 @@ public class TestController {
         return "tests/index";
     }
 
+    @PostMapping()
+    public String indexByName(@RequestParam("query") String query, Model model) {
+        List<Test> tests = testService.getTestsByTitleStartingWith(query);
+
+        tests.forEach(test -> {
+            test.setCountOfCurrentUserDecisions(decisionService.findCountOfDecisionsByUser(test));
+            test.setBestDecisionOfCurrentUser(decisionService.findBestDecisionByUser(test));
+        });
+
+        model.addAttribute("tests", tests);
+        model.addAttribute("query", query);
+        return "tests/index";
+    }
+
     @GetMapping("/{id}")
     public String info(@PathVariable("id") int id,
                        Model model) {
