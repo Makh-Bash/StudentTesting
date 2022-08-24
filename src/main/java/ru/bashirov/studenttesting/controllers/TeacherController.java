@@ -13,6 +13,7 @@ import ru.bashirov.studenttesting.services.UserService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +70,8 @@ public class TeacherController {
         Optional<Test> test = testService.findById(id);
 
         if (test.isPresent()) {
+            test.get().getQuestions().sort(Comparator.comparingInt(Question::getNumberOfQuestion));
+
             model.addAttribute("test", test.get());
             return "tests/edit";
         }

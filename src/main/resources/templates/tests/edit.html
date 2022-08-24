@@ -17,52 +17,59 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div>
+<main>
+    <div class="container mt-5 col-lg-6 col-sm-10">
+        <h4>Редактирование</h4>
+        <hr>
 
-    <form th:method="PATCH" th:action="@{/teacher/{id}(id=${test.id})}" th:object="${test}">
-        <input type="hidden" th:field="*{owner}">
-        <input type="hidden" th:field="*{countOfQuestions}">
-        <input type="hidden" th:field="*{category}">
-        <input type="hidden" th:field="*{title}">
-        <input type="hidden" th:field="*{dateOfCreation}">
-        <input type="hidden" th:field="*{countOfDecisions}">
+        <form th:method="PATCH" th:action="@{/teacher/{id}(id=${test.id})}" th:object="${test}">
+            <input type="hidden" th:field="*{owner}">
+            <input type="hidden" th:field="*{countOfQuestions}">
+            <input type="hidden" th:field="*{category}">
+            <input type="hidden" th:field="*{title}">
+            <input type="hidden" th:field="*{dateOfCreation}">
+            <input type="hidden" th:field="*{countOfDecisions}">
 
-        <div th:each="question, iterstat : *{questions}">
-            <input type="hidden" th:field="*{questions[__${iterstat.index}__].id}">
-            <input type="hidden" th:field="*{questions[__${iterstat.index}__].numberOfQuestion}">
-            <!--      <input type="hidden" th:field="*{questions[__${iterstat.index}__].}">-->
+            <div th:each="question, iterstat : *{questions}" class="card mt-2 mb-5">
+                <input type="hidden" th:field="*{questions[__${iterstat.index}__].id}">
+                <input type="hidden" th:field="*{questions[__${iterstat.index}__].numberOfQuestion}">
+                <div class="card-header">
+                    <label class="form-label" for="title">Вопрос №</label><span th:text="${iterstat.index+1}"></span>
+                    <textarea class="form-control" title="Строка не может быть пустой" required minlength="4"
+                              maxlength="100"
+                              th:field="*{questions[__${iterstat.index}__].title}" id="title"></textarea>
+                </div>
+                <div class="card-body">
 
-            <label for="title">Вопрос №</label><span th:text="${iterstat.index+1}"></span>
-            <input type="text" title="Строка не может быть пустой" required minlength="4" maxlength="100"
-                   th:field="*{questions[__${iterstat.index}__].title}" id="title"><br>
+                    <input class="form-control" placeholder="1 Ответ" type="text" title="Строка не может быть пустой"
+                           required maxlength="100"
+                           th:field="*{questions[__${iterstat.index}__].firstAnswer}" id="firstAnswer"><br>
 
-            <label for="firstAnswer">Первый ответ </label>
-            <input type="text" title="Строка не может быть пустой" required maxlength="100"
-                   th:field="*{questions[__${iterstat.index}__].firstAnswer}" id="firstAnswer"><br>
+                    <input class="form-control" placeholder="2 Ответ" type="text" title="Строка не может быть пустой"
+                           required maxlength="100"
+                           th:field="*{questions[__${iterstat.index}__].secondAnswer}" id="secondAnswer"><br>
 
-            <label for="secondAnswer">Второй ответ </label>
-            <input type="text" title="Строка не может быть пустой" required maxlength="100"
-                   th:field="*{questions[__${iterstat.index}__].secondAnswer}" id="secondAnswer"><br>
+                    <input class="form-control" placeholder="3 Ответ" type="text" title="Строка не может быть пустой"
+                           required maxlength="100"
+                           th:field="*{questions[__${iterstat.index}__].thirdAnswer}" id="thirdAnswer"><br>
 
-            <label for="thirdAnswer">Третий ответ </label>
-            <input type="text" title="Строка не может быть пустой" required maxlength="100"
-                   th:field="*{questions[__${iterstat.index}__].thirdAnswer}" id="thirdAnswer"><br>
+                    <input class="form-control" placeholder="4 Ответ" type="text" title="Строка не может быть пустой"
+                           required maxlength="100"
+                           th:field="*{questions[__${iterstat.index}__].fourthAnswer}" id="fourthAnswer"><br>
 
-            <label for="fourthAnswer">Четвертый ответ </label>
-            <input type="text" title="Строка не может быть пустой" required maxlength="100"
-                   th:field="*{questions[__${iterstat.index}__].fourthAnswer}" id="fourthAnswer"><br>
+                    <!--        TODO Не работает-->
+                    <!--        <div style="color: red" th:if="${#fields.hasErrors('questions[__${iterstat.index}__].fourthAnswer')}" th:errors="*{questions[__${iterstat.index}__].fourthAnswer}">ANSWER ERROR</div>-->
 
-            <!--        TODO Не работает-->
-            <!--        <div style="color: red" th:if="${#fields.hasErrors('questions[__${iterstat.index}__].fourthAnswer')}" th:errors="*{questions[__${iterstat.index}__].fourthAnswer}">ANSWER ERROR</div>-->
-
-            <label for="correctAnswerId">Номер правильного ответа </label>
-            <input required type="number" min="1" max="4" th:field="*{questions[__${iterstat.index}__].correctAnswerId}"
-                   id="correctAnswerId">
-            <hr>
-        </div>
-        <input type="submit" value="Создать">
-    </form>
-</div>
+                    <label class="form-label" for="correctAnswerId">Номер правильного ответа </label>
+                    <input class="form-control form-control-sm" required type="number" min="1" max="4"
+                           th:field="*{questions[__${iterstat.index}__].correctAnswerId}"
+                           id="correctAnswerId">
+                </div>
+            </div>
+            <input class="btn btn-outline-primary mb-5 ps-4 pe-4" type="submit" value="Обновить">
+        </form>
+    </div>
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

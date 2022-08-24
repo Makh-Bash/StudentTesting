@@ -18,33 +18,42 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-
-<div th:if="${tests.isEmpty()}">
-    <p>У вас пока нет собственных тестов</p>
+<main>
+<div th:if="${tests.isEmpty()}" class="text-center mt-5">
+    <p class="fs-5 text-secondary">У вас пока нет собственных тестов</p>
+    <a class="link-primary" th:href="@{/teacher/new}">Создать</a>
 </div>
 
-<div th:if="${!tests.isEmpty()}">
-    <div th:each="test : ${tests}">
-        <p th:text="'Название: ' + ${test.title}"></p>
-        <p th:text="'Категория: ' + ${test.category.title}"></p>
-        <p th:text="'Количество вопросов: ' + ${test.countOfQuestions}"></p>
-        <p th:text="'Количество решений: ' + ${test.countOfDecisions}"></p>
-        <p th:text="'Дата создания: ' + ${test.dateOfCreation}"></p>
+<div th:if="${!tests.isEmpty()}" class="container mt-5 col-lg-6 col-md-8 col-sm-12 justify-content-center">
+    <h4>Мои тесты</h4>
+    <hr>
 
-        <form th:method="DELETE" th:action="@{/teacher/{id}(id=${test.id})}">
-            <input type="submit" value="Удалить" style="color: red">
-        </form>
-
-        <form th:method="GET" th:action="@{/teacher/{id}/edit(id=${test.id})}">
-            <input type="submit" value="Редактировать" style="color: blue">
-        </form>
+    <div th:each="test : ${tests}" class="card my-5">
+        <div class="card-header">
+            <span th:text="'Название: ' + ${test.title}"></span>
+        </div>
+        <div class="card-body bg-light">
+            <p class="card-text" th:text="'Категория: ' + ${test.category.title}"></p>
+            <p class="card-text" th:text="'Количество вопросов: ' + ${test.countOfQuestions}"></p>
+            <p class="card-text" th:text="'Количество решений: ' + ${test.countOfDecisions}"></p>
+            <p class="card-text" th:text="'Дата создания: ' + ${test.dateOfCreation}"></p>
 
 
-        <hr>
+            <div class="row mt-2 justify-content-between">
+                <form class="justify-content-center col-xl-4 col-xxl-3 col-sm-5 mb-2" th:method="GET" th:action="@{/teacher/{id}/edit(id=${test.id})}">
+                    <input class="btn btn-outline-primary col-12" type="submit" value="Редактировать">
+                </form>
+
+                <form class="justify-content-center col-xl-4 col-xxl-3 col-sm-5 mb-2" th:method="DELETE" th:action="@{/teacher/{id}(id=${test.id})}">
+                    <input class="btn btn-outline-danger col-12" type="submit" value="Удалить">
+                </form>
+            </div>
+        </div>
+
     </div>
 
 </div>
-<a th:href="@{/}">Главное меню</a>
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>
