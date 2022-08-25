@@ -1,6 +1,11 @@
 ## StudentTesting
 **Full-stack application for testing students**
 
+**The application supports 3 roles:** 
+ - Student (Can pass tests and change profile)
+ - Teacher (Student options and ability to create tests)
+ - Admin (Teacher options and the ability to remove or ban users or tests)
+
 **Technologies used**:
 
 **Back-end:**
