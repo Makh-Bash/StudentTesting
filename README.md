@@ -18,7 +18,7 @@
  - Bootstrap 5
  - JavaScript
 
-**Plan to launch the program**
+**Getting Started:**
  - Download
  - Create a database and connect it to the application in the "application.properties" file(default name "studtesting")
  - Run "init.sql" file located in "src/main/resources/static/sql" to create tables and fake data
