@@ -84,7 +84,6 @@ public class TestController {
         int rightAnswersCount = (int) answersList.getAnswers().stream().filter(Question::isRight).count();
         String resultInfo = rightAnswersCount + "/" + answersList.getAllQuestionsCount();
 
-
         decisionService.save(answersList, rightAnswersCount);
         testService.countUp(id);
         model.addAttribute("resultInfo", resultInfo);

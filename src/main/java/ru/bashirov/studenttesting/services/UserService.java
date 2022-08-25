@@ -77,4 +77,14 @@ public class UserService {
             usersRepository.save(value);
         });
     }
+
+    public String getUserRole() {
+        String role;
+        switch (getCurrentUser().getRole()) {
+            case "ROLE_ADMIN" : role = "Администратор"; break;
+            case "ROLE_TEACHER" : role = "Учитель"; break;
+            default: role = "Студент";
+        }
+        return role;
+    }
 }

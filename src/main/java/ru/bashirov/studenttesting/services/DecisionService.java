@@ -26,11 +26,11 @@ public class DecisionService {
 
     @Transactional
     public void save(AnswersList answersList, int rightAnswersCount) {
-        Decision decision = enrichDecision(answersList, rightAnswersCount);
+        Decision decision = createDecision(answersList, rightAnswersCount);
         decisionsRepository.save(decision);
     }
 
-    private Decision enrichDecision(AnswersList answersList, int rightAnswersCount) {
+    private Decision createDecision(AnswersList answersList, int rightAnswersCount) {
         Decision decision = new Decision();
         decision.setPerson(userService.getCurrentUser());
         decision.setTest(answersList.getAnswers().get(0).getTest());

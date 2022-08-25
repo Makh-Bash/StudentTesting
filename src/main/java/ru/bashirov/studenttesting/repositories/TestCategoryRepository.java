@@ -6,5 +6,4 @@ import ru.bashirov.studenttesting.models.TestCategory;
 
 @Repository
 public interface TestCategoryRepository extends JpaRepository<TestCategory, Integer> {
-
 }

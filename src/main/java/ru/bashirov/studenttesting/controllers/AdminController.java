@@ -24,13 +24,11 @@ public class AdminController {
         this.testService = testService;
     }
 
-// TODO 1 объект вместо полей
     @GetMapping()
     public String home(Model model) {
         model.addAttribute("usersCount", userService.getUsersCount());
         model.addAttribute("studentsCount", userService.getStudentsCount());
         model.addAttribute("teachersCount", userService.getTeachersCount());
-
         return "admin/home";
     }
 

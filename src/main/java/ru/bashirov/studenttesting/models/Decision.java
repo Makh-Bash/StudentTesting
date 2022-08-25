@@ -88,6 +88,4 @@ public final class Decision {
     public void setTest(Test test) {
         this.test = test;
     }
-
-
 }

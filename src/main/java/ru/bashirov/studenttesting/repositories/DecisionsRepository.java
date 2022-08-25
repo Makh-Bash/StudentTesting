@@ -19,6 +19,4 @@ public interface DecisionsRepository extends JpaRepository<Decision, Integer> {
             , nativeQuery = true)
     Integer findMaxCountOfRightAnswersByPersonAndTest(int tests_id , int users_id);
 
-//    int findTopByCountOfRightAnswersAndPersonAndTest(User user, Test test);
-
 }

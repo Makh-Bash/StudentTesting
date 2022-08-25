@@ -3,13 +3,16 @@ package ru.bashirov.studenttesting.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.bashirov.studenttesting.models.Question;
 import ru.bashirov.studenttesting.models.Test;
 import ru.bashirov.studenttesting.models.TestCategory;
 import ru.bashirov.studenttesting.repositories.QuestionsRepository;
 import ru.bashirov.studenttesting.repositories.TestCategoryRepository;
 import ru.bashirov.studenttesting.repositories.TestsRepository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +61,13 @@ public class TestService {
 
     @Transactional
     public void save(Test test) {
+        enrichTest(test);
+
+        questionsRepository.saveAll(test.getQuestions());
+        testsRepository.save(test);
+    }
+
+    private static void enrichTest(Test test) {
         test.setCountOfDecisions(0);
         test.setDateOfCreation(new Date());
 
@@ -66,10 +76,6 @@ public class TestService {
             question.setTest(test);
             question.setNumberOfQuestion(counter.getAndIncrement());
         });
-
-        questionsRepository.saveAll(test.getQuestions());
-
-        testsRepository.save(test);
     }
 
     @Transactional
@@ -78,11 +84,11 @@ public class TestService {
         testsRepository.deleteById(id);
     }
 
-    //    TODO рефактор
     @Transactional
     public void update(int id, Test test) {
         test.setId(id);
         testsRepository.save(test);
+
         test.getQuestions().forEach(question -> questionsRepository
                 .findById(question.getId())
                 .ifPresent(value -> {
@@ -99,5 +105,12 @@ public class TestService {
 
     public List<Test> getTestsByTitleStartingWith(String query) {
         return testsRepository.findAllByTitleStartingWith(query);
+    }
+
+    public void setNewQuestions(Test test) {
+        ArrayList<Question> questions = new ArrayList<>();
+        for (int i = 0; i < test.getCountOfQuestions(); i++)
+            questions.add(new Question());
+        test.setQuestions(questions);
     }
 }

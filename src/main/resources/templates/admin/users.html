@@ -37,10 +37,12 @@
 
                     <p class="text-danger" th:if="${user.role.equals('ROLE_ADMIN')}">Администратор</p>
                     <p class="text-success" th:if="${user.role.equals('ROLE_TEACHER')}">Учитель</p>
-                    <p class="" th:if="${user.role.equals('ROLE_USER')}">Студент</p>
+                    <p th:if="${user.role.equals('ROLE_USER')}">Студент</p>
+                    <p class="text-black-50" th:if="${user.role.equals('ROLE_DISABLED')}">Заблокирован</p>
 
                     <div class="row mb-2 justify-content-between">
-                        <form th:method="PATCH" th:if="${!user.role.equals('ROLE_ADMIN')}"
+                        <form th:method="PATCH"
+                              th:if="${!user.role.equals('ROLE_ADMIN')}"
                               th:action="@{/admin/users/{id}(id=${user.id})}"
                               class="justify-content-center col-xl-4 col-sm-5 mb-2">
                             <input type="submit" value="Заблокировать" class="btn btn-outline-danger col-12">

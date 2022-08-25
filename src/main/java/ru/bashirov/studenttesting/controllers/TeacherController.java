@@ -7,12 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.bashirov.studenttesting.models.Question;
 import ru.bashirov.studenttesting.models.Test;
-import ru.bashirov.studenttesting.services.QuestionService;
 import ru.bashirov.studenttesting.services.TestService;
 import ru.bashirov.studenttesting.services.UserService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -25,21 +23,17 @@ public class TeacherController {
 
     private final UserService userService;
 
-    private final QuestionService questionService;
 
     @Autowired
-    public TeacherController(TestService testService, UserService userService, QuestionService questionService) {
+    public TeacherController(TestService testService, UserService userService) {
         this.testService = testService;
         this.userService = userService;
-        this.questionService = questionService;
     }
 
     @GetMapping()
     public String index(Model model) {
         List<Test> tests = testService.findAllByOwnerId(userService.getCurrentUser().getId());
-
         model.addAttribute("tests", tests);
-
         return "teacher/tests";
     }
 
@@ -54,7 +48,6 @@ public class TeacherController {
             return "teacher/questions";
         } else {
             testService.update(id, test);
-            System.out.println("Обновление");
             return "redirect:/teacher";
         }
     }
@@ -89,7 +82,6 @@ public class TeacherController {
         return "teacher/new";
     }
 
-    //    TODO отрефакторить метод
     @PostMapping("/new")
     public String check(@ModelAttribute @Valid Test test,
                         BindingResult bindingResult,
@@ -98,11 +90,7 @@ public class TeacherController {
             model.addAttribute("categories", testService.getAllCategories());
             return "teacher/new";
         } else {
-            ArrayList<Question> questions = new ArrayList<>();
-            for (int i = 0; i < test.getCountOfQuestions(); i++)
-                questions.add(new Question());
-
-            test.setQuestions(questions);
+            testService.setNewQuestions(test);
 
             model.addAttribute("test", test);
             return "teacher/questions";

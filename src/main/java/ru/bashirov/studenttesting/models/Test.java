@@ -22,9 +22,6 @@ public final class Test {
     @Size(min = 4, max = 100, message = "Название может содержать от 4 до 100 символов")
     private String title;
 
-//    @NotBlank(message = "Название категории не должно быть пустым")
-//    @Size(min = 4, max = 100, message = "Название категории должно содержать от 4 до 100 символов")
-
     @Column(name = "count_of_questions")
     @Min(value = 2, message = "Количество вопросов должно быть не меньше 2")
     @Max(value = 100, message = "Количество вопросов должно быть не больше 100")
@@ -35,7 +32,7 @@ public final class Test {
 
     @Column(name = "date_of_creation")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfCreation;
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
