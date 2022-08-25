@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "test_category")
-public class TestCategory {
+public final class TestCategory {
 
     @Id
     @Column(name = "id")

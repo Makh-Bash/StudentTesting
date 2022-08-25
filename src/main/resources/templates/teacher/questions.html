@@ -20,7 +20,7 @@
 <main>
     <div class="container mt-5 col-lg-6 col-sm-10">
 
-        <form th:method="POST" th:action="@{/teacher/add}" th:object="${test}">
+        <form id="main" th:method="POST" th:action="@{/teacher/add}" th:object="${test}">
             <input type="hidden" th:field="*{owner}">
             <input type="hidden" th:field="*{countOfQuestions}">
             <input type="hidden" th:field="*{category}">
@@ -59,11 +59,13 @@
                            th:field="*{questions[__${iterstat.index}__].correctAnswerId}" id="correctAnswerId">
                 </div>
             </div>
-            <input class="btn btn-outline-success mb-5 ps-4 pe-4" type="submit" value="Создать">
+            <input class="btn btn-outline-success mb-4 ps-4 pe-4" id="submitButton" type="submit" value="Создать">
+            <p id="validateText" class="text-danger mb-3"></p>
         </form>
 
     </div>
 </main>
 <footer th:insert="blocks/footer :: footer"></footer>
+<script src="../../static/js/formValidator.js" th:src="@{/js/formValidator.js}"></script>
 </body>
 </html>

@@ -47,7 +47,7 @@ public class User {
 
     @Column(name = "year_of_birth")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date yearOfBirth;
 
     @Column(name = "time_of_registration")

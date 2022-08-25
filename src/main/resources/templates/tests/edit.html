@@ -22,7 +22,7 @@
         <h4>Редактирование</h4>
         <hr>
 
-        <form th:method="PATCH" th:action="@{/teacher/{id}(id=${test.id})}" th:object="${test}">
+        <form id="main" th:method="PATCH" th:action="@{/teacher/{id}(id=${test.id})}" th:object="${test}">
             <input type="hidden" th:field="*{owner}">
             <input type="hidden" th:field="*{countOfQuestions}">
             <input type="hidden" th:field="*{category}">
@@ -66,10 +66,14 @@
                            id="correctAnswerId">
                 </div>
             </div>
-            <input class="btn btn-outline-primary mb-5 ps-4 pe-4" type="submit" value="Обновить">
+            <input class="btn btn-outline-primary mb-5 ps-4 pe-4" id="submitButton" type="submit" value="Обновить">
+            <p id="validateText" class="text-danger mb-3"></p>
+
         </form>
     </div>
 </main>
 <footer th:insert="blocks/footer :: footer"></footer>
+<script src="../../static/js/formValidator.js" th:src="@{/js/formValidator.js}"></script>
+
 </body>
 </html>

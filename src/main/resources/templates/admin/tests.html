@@ -41,7 +41,7 @@
                 <p th:text="${'По вашему запросу найдено ' + tests.size() + ' результат(ов)'}"></p>
             </div>
 
-            <div class="p-3 mb-4  border border-3 rounded-2 bg-light" th:each="test : ${tests}">
+            <div class="p-3 mb-4 border border-3 rounded-2 bg-light" th:each="test : ${tests}">
                 <p th:text="${'Название: ' + test.title}">TEST TITLE</p>
                 <p th:text="${'Имя автора: ' + test.owner.firstName + ' ' + test.owner.lastName}">TEST AUTHOR</p>
                 <p th:text="${'ID: ' + test.id}">TEST ID</p>

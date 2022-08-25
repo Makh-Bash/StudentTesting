@@ -9,6 +9,7 @@ import ru.bashirov.studenttesting.services.RegistrationService;
 import ru.bashirov.studenttesting.util.UserValidator;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,6 +41,7 @@ public class AuthController {
     public String performRegistration(@ModelAttribute("user") @Valid User user,
                                       BindingResult bindingResult,
                                       @RequestParam("role") String role) {
+
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
             return "auth/registration";

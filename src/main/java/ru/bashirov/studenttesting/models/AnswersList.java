@@ -2,7 +2,7 @@ package ru.bashirov.studenttesting.models;
 
 import java.util.ArrayList;
 
-public class AnswersList {
+public final class AnswersList {
 
     private ArrayList<Question> answers;
 
