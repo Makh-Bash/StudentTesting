@@ -12,7 +12,7 @@ submitButton.addEventListener('click', function (event) {
         document.getElementById('dateText').innerText = errorText;
         event.preventDefault();
     }
-    if (dateInput.value) {
+    else if (new Date(dateInput.value).getFullYear() < 1900) {
         let errorText = 'Введите корректную дату рождения';
         document.getElementById('dateText').innerText = errorText;
         event.preventDefault();
