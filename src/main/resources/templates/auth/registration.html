@@ -13,15 +13,6 @@
         <h4>Регистрация</h4>
         <hr>
 
-        <label class="form-label" for="firstName">Введите имя:</label>
-        <input class="form-control" type="text" th:field="*{firstName}" id="firstName">
-        <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FIRSTNAME ERROR
-        </div>
-        <br>
-        <label class="form-label" for="lastName">Введите фамилию:</label>
-        <input class="form-control" type="text" th:field="*{lastName}" id="lastName">
-        <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LASTNAME ERROR</div>
-        <br>
         <label class="form-label" for="login">Введите логин (Изменить нельзя):</label>
         <input class="form-control" type="text" th:field="*{login}" id="login">
         <div class="text-danger" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">LOGIN ERROR</div>
@@ -29,11 +20,6 @@
         <label class="form-label" for="email">Введите email (Изменить нельзя):</label>
         <input class="form-control" type="email" th:field="*{email}" id="email">
         <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">EMAIL ERROR</div>
-        <br>
-        <label class="form-label" for="date">Введите дату рождения (01/01/2000):</label>
-        <input class="form-control" type="date" th:field="*{yearOfBirth}" id="date">
-        <div class="text-danger" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">DATE ERROR</div>
-        <p class="text-danger" id="dateText"></p>
         <br>
         <p class="form-label">Вы :</p>
         <input type="radio" checked th:name="role" id="student" value="student">

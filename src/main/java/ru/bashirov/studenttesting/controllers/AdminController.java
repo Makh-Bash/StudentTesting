@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.bashirov.studenttesting.models.Test;
 import ru.bashirov.studenttesting.models.User;
-import ru.bashirov.studenttesting.services.TestService;
 import ru.bashirov.studenttesting.services.UserService;
 
 import java.util.List;
@@ -16,12 +14,10 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
-    private final TestService testService;
 
     @Autowired
-    public AdminController(UserService userService, TestService testService) {
+    public AdminController(UserService userService) {
         this.userService = userService;
-        this.testService = testService;
     }
 
     @GetMapping()
@@ -32,23 +28,7 @@ public class AdminController {
         return "admin/home";
     }
 
-    @GetMapping("/tests")
-    public String checkTests() {
-        return "admin/tests";
-    }
 
-    @PostMapping("/tests")
-    public String findTests(@RequestParam("query") String query, Model model) {
-        List<Test> tests = testService.getTestsByTitleStartingWith(query);
-        model.addAttribute("tests", tests);
-        return "admin/tests";
-    }
-
-    @DeleteMapping("tests/{id}")
-    public String deleteTest(@PathVariable("id") int id) {
-        testService.deleteById(id);
-        return "redirect:/admin/tests";
-    }
 
     @GetMapping("/users")
     public String checkUsers() {
