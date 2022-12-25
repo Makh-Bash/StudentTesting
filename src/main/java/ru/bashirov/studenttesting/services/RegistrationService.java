@@ -32,6 +32,5 @@ public class RegistrationService {
 
     private void enrichUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setTimeOfRegistration(new Date());
     }
 }

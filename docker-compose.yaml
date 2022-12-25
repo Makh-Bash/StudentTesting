@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  db:
+    container_name: studtesting_db
+    image: postgres:13
+    volumes:
+      - studtesting_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=studtesting
+

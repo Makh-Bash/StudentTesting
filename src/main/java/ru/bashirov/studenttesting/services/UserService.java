@@ -68,14 +68,7 @@ public class UserService {
     public void update(User user) {
         Optional<User> findUser = usersRepository.findById(user.getId());
 
-        findUser.ifPresent(value -> {
-            value.setFirstName(user.getFirstName());
-            value.setLastName(user.getLastName());
-
-            getCurrentUser().setFirstName(user.getFirstName());
-            getCurrentUser().setLastName(user.getLastName());
-            usersRepository.save(value);
-        });
+        findUser.ifPresent(usersRepository::save);
     }
 
     public String getUserRole() {
