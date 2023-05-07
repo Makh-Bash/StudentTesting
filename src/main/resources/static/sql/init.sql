@@ -28,7 +28,7 @@ CREATE TABLE tests (
     category_id int REFERENCES test_category(id),
     count_of_questions smallint NOT NULL CHECK ( count_of_questions > 0 ) ,
     count_of_decisions int DEFAULT 0,
-    date_of_creation date NOT NULL CHECK ( date_of_creation > '2022-06-01' ),
+    date_of_creation date NOT NULL CHECK ( date_of_creation > '2023-01-01' ),
     users_id int REFERENCES users(id) ON DELETE SET NULL
 );
 
@@ -73,10 +73,10 @@ INSERT INTO test_category(title) VALUES
 ('История');
 
 INSERT INTO tests(title, category_id, count_of_questions, date_of_creation, users_id) VALUES
-('Анатомия', 2, 2, '2022-07-01', 3),
-('Математика 11 класс', 1, 3, '2022-07-03', 3),
-('Астрономия', 5, 3, '2022-07-04', 3),
-('Русский язык для 8 класса', 4, 3, '2022-07-05', 3);
+('Анатомия', 2, 2, '2023-03-01', 3),
+('Математика 11 класс', 1, 3, '2023-03-03', 3),
+('Астрономия', 5, 3, '2023-03-04', 3),
+('Русский язык для 8 класса', 4, 3, '2023-03-05', 3);
 
 
 INSERT INTO questions (title, number_of_question, correct_answer_id, first_answer, second_answer, third_answer, fourth_answer, tests_id) VALUES
@@ -93,9 +93,9 @@ INSERT INTO questions (title, number_of_question, correct_answer_id, first_answe
 ('Их__ решение',3,3,'нее','ний','ничего','Не знаю правильного ответа', 4);
 
 INSERT INTO decisions(users_id, tests_id, time_of_decision, count_of_right_answers, count_of_all_answers) VALUES
-(1, 1, '2022-07-08 04:05:06', 1, 2),
-(1, 2, '2022-07-09 22:05:06', 3, 3),
-(2, 2, '2022-07-09 21:02:06', 2, 3),
-(2, 3, '2022-07-09 21:07:08', 2, 3);
+(1, 1, '2023-03-05 04:05:06', 1, 2),
+(1, 2, '2023-03-06 22:05:06', 3, 3),
+(2, 2, '2023-03-07 21:02:06', 2, 3),
+(2, 3, '2023-03-08 21:07:08', 2, 3);
 
 
